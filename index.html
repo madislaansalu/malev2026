@@ -505,6 +505,12 @@ Kas jätkan?</div>
 </ul>
 
 
+<!-- GITHUB PAGES LINK -->
+<div style="background:#1A7A6E; color:white; border-radius:8px; padding:14px 20px; margin:20px 0; text-align:center;">
+  <strong>Koolitusmaterjal on avalikult kättesaadav:</strong><br>
+  <a href="https://madislaansalu.github.io/malev2026/" target="_blank" style="color:#A8D8D2; font-size:12pt;">https://madislaansalu.github.io/malev2026/</a>
+</div>
+
 <!-- CLAUDE CODE SESSIOONI MÄRGE -->
 <div style="background:#f0f4f8; border:2px dashed #1A7A6E; border-radius:8px; padding:16px 20px; margin:30px 0; text-align:center;">
   <strong style="color:#1A7A6E; font-size:12pt;">Sammud 17–21: Claude Code terminali sessioon</strong><br>
@@ -723,6 +729,59 @@ malev2026/<br>
   <li>"Salvesta mälu" on hea tava sessiooni lõpus — eriti pikemaajaliste projektide puhul</li>
 </ul>
 
+<h2>Samm 25 — Git repo seadistamine ja failide üles laadimine</h2>
+
+<div class="promptbox">
+  <div class="prompt-header">Prompt 25: "nüüd liigume koolitusmaterjali githubi pagena nähtavaks tegemisele"</div>
+  <div class="prompt-body">Kasutaja soovis koolitusmaterjali avalikuks teha GitHub Pages kaudu. Claude kontrollis esmalt .gitignore seadistust (lisas venv/ kausta), seejärel juhendas git käskude täitmist.</div>
+</div>
+
+<div class="responsebox">
+  <div class="response-header">🤖 Claude'i vastus</div>
+  <div class="response-body">Claude lisas <code>venv/</code> .gitignore-sse (virtuaalkeskkond ei tohi GitHubi minna) ja juhendas järgmised käsud:<br><br>
+  <code>git init</code><br>
+  <code>git remote add origin https://github.com/madislaansalu/malev2026.git</code><br>
+  <code>git branch -M main</code><br>
+  <code>git add .</code><br>
+  <code>git status</code> — kontrolli et .env ei ole nimekirjas<br>
+  <code>git commit -m "Lisa koolitusmaterjal ja kandideerimise skript"</code><br>
+  <code>git push -u origin main</code><br><br>
+  <strong>Tulemus:</strong> 7 faili üles laaditud, .env jäi kohalikuks.</div>
+</div>
+
+<p><strong>Õppetund — mis läks GitHubi, mis jäi kohapeale:</strong></p>
+<ul>
+  <li>GitHubi läks: <code>index.html</code>, <code>.env.example</code>, <code>.gitignore</code>, <code>README.md</code>, <code>JUHEND.md</code>, <code>malev_kandideerimine.py</code>, <code>malev_oppematerjal.html</code></li>
+  <li>Kohapeale jäi: <code>.env</code> (isikuandmed), <code>venv/</code> (virtuaalkeskkond), <code>kinnituskuva.png</code></li>
+  <li><code>git status</code> enne commiti on oluline kontrollsamm — veendu alati et tundlikud failid pole staging-alal</li>
+</ul>
+
+<h2>Samm 26 — GitHub Pages aktiveerimine</h2>
+
+<div class="promptbox">
+  <div class="prompt-header">Tegevus 26: GitHub Pages seadistamine repo Settings → Pages</div>
+  <div class="prompt-body">Pärast failide GitHubi laadimist tuli aktiveerida GitHub Pages teenus. See muudab repo index.html faili avalikuks veebileheks tasuta ja automaatselt.</div>
+</div>
+
+<div class="responsebox">
+  <div class="response-header">🤖 Claude'i vastus</div>
+  <div class="response-body">Juhend GitHub Pages aktiveerimiseks:<br><br>
+  1. Mine: <strong>github.com/madislaansalu/malev2026/settings/pages</strong><br>
+  2. Source: <strong>Deploy from a branch</strong><br>
+  3. Branch: <strong>main</strong> → <strong>/ (root)</strong><br>
+  4. Kliki <strong>Save</strong><br><br>
+  Pärast ~2 minutit on koolitusmaterjal avalik aadressil:<br>
+  <strong>https://madislaansalu.github.io/malev2026/</strong></div>
+</div>
+
+<p><strong>GitHub Pages — mida see tähendab:</strong></p>
+<ul>
+  <li>Iga kord kui teed <code>git push</code>, uuendub veebileht automaatselt 1–2 minutiga</li>
+  <li>Leht on kättesaadav kogu maailmast turvalise <a href="https://et.wikipedia.org/wiki/HTTPS" target="_blank" style="color:#1A7A6E;text-decoration:underline dotted;">HTTPS</a> ühendusega</li>
+  <li>Teenus on täiesti tasuta avalike repode jaoks</li>
+  <li>Koolitusmaterjal on nüüd jagamisvalmis link: <a href="https://madislaansalu.github.io/malev2026/" target="_blank" style="color:#1A7A6E;">https://madislaansalu.github.io/malev2026/</a></li>
+</ul>
+
 
 <!-- 3. PÕHIMÕTTED -->
 <h1 id="pohimotted">3. Kuidas Claude'iga tõhusalt suhelda — 7 põhimõtet</h1>
@@ -854,6 +913,9 @@ python malev_kandideerimine.py
   <li>Playwright headless viga parandati — brauser töötab nüüd taustal (Samm 22)</li>
   <li>Selgitati mida teha kuni kell 16:00 — skript käivitada kell 15:55 (Samm 23)</li>
   <li>Claude'i mälu salvestati ja koolitusmaterjal viidi lõpule (Samm 24)</li>
+  <li>Git repo seadistati ja failid lükati GitHubi (Samm 25)</li>
+  <li>Git repo seadistati ja failid lükati GitHubi (Samm 25)</li>
+  <li>GitHub Pages aktiveeriti — koolitusmaterjal on avalikult kättesaadav (Samm 26)</li>
 </ol>
 
 <br>
