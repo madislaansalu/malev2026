@@ -26,6 +26,33 @@ from playwright.async_api import async_playwright
 load_dotenv()
 
 # ─────────────────────────────────────────────
+#  LOGIMINE
+# ─────────────────────────────────────────────
+LOG_FAIL = "tulemus.log"
+_log_read = []
+
+def log(sõnum: str, tase: str = "INFO"):
+    """Kirjutab sõnumi nii terminali kui tulemus.log faili."""
+    ajatempel = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    rida = f"[{ajatempel}] [{tase}] {sõnum}"
+    print(rida)
+    _log_read.append(rida)
+    with open(LOG_FAIL, "a", encoding="utf-8") as f:
+        f.write(rida + "\n")
+
+def kirjuta_kokkuvõte(olek: str, üksikasjad: list[str]):
+    """Kirjutab struktureeritud kokkuvõtte logi lõppu."""
+    piir = "=" * 55
+    with open(LOG_FAIL, "a", encoding="utf-8") as f:
+        f.write(f"\n{piir}\n")
+        f.write(f"  KOKKUVÕTE — {datetime.now().strftime('%d.%m.%Y %H:%M:%S')}\n")
+        f.write(f"  Olek: {olek}\n")
+        f.write(f"{piir}\n")
+        for rida in üksikasjad:
+            f.write(f"  • {rida}\n")
+        f.write(f"{piir}\n\n")
+
+# ─────────────────────────────────────────────
 #  KANDIDAADI ANDMED (.env failist)
 # ─────────────────────────────────────────────
 ANDMED = {
@@ -59,7 +86,7 @@ MALEV_URL = "https://malev.ee/"
 # ─────────────────────────────────────────────
 async def oota_kuni_16(page):
     """Uuendab malev.ee iga 5 sekundi tagant kuni kandideerimislink ilmub."""
-    print("⏳  Ootan kandideerimislingi ilmumist...")
+    log("⏳  Ootan kandideerimislingi ilmumist...")
     while True:
         now = datetime.now().time()
         if now >= KANDIDEERIMISE_ALGUS:
@@ -67,10 +94,10 @@ async def oota_kuni_16(page):
             # Otsi kandideerimisnuppu / linki
             link = await leia_kandideerimislink(page)
             if link:
-                print(f"✅  Kandideerimislink leitud: {link}")
+                log(f"✅  Kandideerimislink leitud: {link}")
                 return link
             else:
-                print(f"🔄  {datetime.now().strftime('%H:%M:%S')} — linki pole veel, proovin uuesti...")
+                log(f"🔄  {datetime.now().strftime('%H:%M:%S')} — linki pole veel, proovin uuesti...")
                 await asyncio.sleep(3)
         else:
             jarg = datetime.now().replace(
@@ -78,10 +105,10 @@ async def oota_kuni_16(page):
             )
             delta = (jarg - datetime.now()).total_seconds()
             if delta > 60:
-                print(f"⏰  {datetime.now().strftime('%H:%M:%S')} — kandideerimine algab {delta/60:.1f} minuti pärast")
+                log(f"⏰  {datetime.now().strftime('%H:%M:%S')} — kandideerimine algab {delta/60:.1f} minuti pärast")
                 await asyncio.sleep(30)
             elif delta > 5:
-                print(f"⏰  {datetime.now().strftime('%H:%M:%S')} — {delta:.0f} sekundit jäänud...")
+                log(f"⏰  {datetime.now().strftime('%H:%M:%S')} — {delta:.0f} sekundit jäänud...")
                 await asyncio.sleep(2)
             else:
                 await asyncio.sleep(0.5)
@@ -113,7 +140,7 @@ async def leia_kandideerimislink(page):
 
 async def taida_google_form(page):
     """Täidab Google Formsi ankeedi."""
-    print("📝  Täidan Google Forms ankeeti...")
+    log("📝  Täidan Google Forms ankeeti...")
 
     async def taida_valja(label_tekst, vastus):
         try:
@@ -124,7 +151,7 @@ async def taida_google_form(page):
             await input_el.fill(vastus)
             print(f"   ✓ {label_tekst}")
         except Exception as e:
-            print(f"   ⚠️  {label_tekst}: {e}")
+            log(f"   ⚠️  {label_tekst}: {e}", "WARN")
 
     # Oota et leht laeb
     await page.wait_for_load_state("networkidle")
@@ -152,7 +179,7 @@ async def taida_google_form(page):
     for i, (inp, vastus) in enumerate(zip(inputs, vastused)):
         await inp.click()
         await inp.fill(vastus)
-        print(f"   ✓ Väli {i+1} täidetud")
+        log(f"   ✓ Väli {i+1} täidetud")
         await asyncio.sleep(0.2)
 
     # Rühma valik (dropdown või raadionupp)
@@ -160,19 +187,19 @@ async def taida_google_form(page):
         dropdowns = await page.query_selector_all("select, [role='listbox']")
         if dropdowns:
             await dropdowns[0].select_option(label=ANDMED["ryhm_1"])
-            print(f"   ✓ Rühm 1: {ANDMED['ryhm_1']}")
+            log(f"   ✓ Rühm 1: {ANDMED['ryhm_1']}")
         # Proovi ka teksti järgi klikkida
         else:
             await page.get_by_text(ANDMED["ryhm_1"], exact=False).first.click()
     except Exception as e:
-        print(f"   ⚠️  Rühma valimine: {e}")
+        log(f"   ⚠️  Rühma valimine: {e}", "WARN")
 
-    print("✅  Ankeet täidetud! Vaatan üle enne esitamist...")
+    log("✅  Ankeet täidetud! Vaatan üle enne esitamist...")
 
 
 async def taida_kohandatud_vorm(page):
     """Täidab kohandatud PHP/WP vormi."""
-    print("📝  Täidan kohandatud vormi...")
+    log("📝  Täidan kohandatud vormi...")
     await page.wait_for_load_state("networkidle")
 
     # Kaardista väljad nime või placeholder järgi
@@ -200,7 +227,7 @@ async def taida_kohandatud_vorm(page):
                 el = page.locator(sel).first
                 if await el.count() > 0:
                     await el.fill(ANDMED[andme_key])
-                    print(f"   ✓ {andme_key}")
+                    log(f"   ✓ {andme_key}")
                     break
             except Exception:
                 continue
@@ -208,76 +235,116 @@ async def taida_kohandatud_vorm(page):
 
 async def esita_ankeet(page):
     """Leiab ja klikib esitamise nupu."""
-    print("🚀  Esitan ankeedi...")
+    log("🚀  Esitan ankeedi...")
     for tekst in ["Esita", "Submit", "Saada", "Kandideeri", "Kinnita"]:
         try:
             nupp = page.get_by_role("button", name=tekst, exact=False).first
             if await nupp.count() > 0:
                 await nupp.click()
-                print(f"✅  Ankeet esitatud! ({tekst})")
+                log(f"✅  Ankeet esitatud! ({tekst})")
                 await asyncio.sleep(3)
                 # Tee ekraanitõmmis kinnituseks
                 await page.screenshot(path="kinnituskuva.png")
-                print("📸  Ekraanitõmmis salvestatud: kinnituskuva.png")
-                return
+                log("📸  Ekraanitõmmis salvestatud: kinnituskuva.png")
+                return True
         except Exception:
             continue
-    print("⚠️  Esitamisnuppu ei leitud — kontrolli brauser akent käsitsi!")
+    log("⚠️  Esitamisnuppu ei leitud — kontrolli brauser akent käsitsi!", "WARN")
+    return False
 
 
 # ─────────────────────────────────────────────
 #  PEAMINE
 # ─────────────────────────────────────────────
 async def main():
-    print("=" * 55)
-    print("  Tallinna Õpilasmalev — Automaatne kandideerimine")
-    print("=" * 55)
-    print(f"  Kandidaat : {ANDMED['nimi']}")
-    print(f"  Rühm 1    : {ANDMED['ryhm_1']}")
-    print(f"  Rühm 2    : {ANDMED['ryhm_2']}")
-    print(f"  Algusaeg  : 06.05.2026 kell 16:00:00")
-    print("=" * 55)
+    # Alusta uut logi sessiooni
+    with open(LOG_FAIL, "a", encoding="utf-8") as f:
+        f.write(f"\n{'='*55}\n  SESSIOON ALGAB — {datetime.now().strftime('%d.%m.%Y %H:%M:%S')}\n{'='*55}\n")
+
+    log("=" * 55)
+    log("  Tallinna Õpilasmalev — Automaatne kandideerimine")
+    log("=" * 55)
+    log(f"  Kandidaat : {ANDMED['nimi']}")
+    log(f"  Rühm 1    : {ANDMED['ryhm_1']}")
+    log(f"  Rühm 2    : {ANDMED['ryhm_2']}")
+    log(f"  Algusaeg  : {KANDIDEERIMISE_ALGUS.strftime('%H:%M:%S')}")
+    log("=" * 55)
+
+    esitatud = False
+    kandideerimis_url = None
+    vormi_tüüp = "teadmata"
 
     async with async_playwright() as p:
-        # headless=False — näed brauserit reaalajas
+        # headless=True — serveris pole X-serverit
         browser = await p.chromium.launch(headless=True, slow_mo=50)
         context = await browser.new_context()
         page = await context.new_page()
 
         # Ava malev.ee juba ette
         await page.goto(MALEV_URL, wait_until="domcontentloaded")
-        print(f"\n🌐  malev.ee avatud. Ootan kuni 16:00...\n")
+        log(f"\n🌐  malev.ee avatud. Ootan kuni 16:00...\n")
 
         # Oota kandideerimislinki
         kandideerimis_url = await oota_kuni_16(page)
 
         if not kandideerimis_url:
-            print("❌  Linki ei leitud. Kontrolli käsitsi!")
+            log("❌  Linki ei leitud. Kontrolli käsitsi!", "ERROR")
+            kirjuta_kokkuvõte("EBAÕNNESTUS", [
+                "Kandideerimislinki ei leitud malev.ee lehelt",
+                "Kontrolli käsitsi brauserist",
+            ])
             input("Vajuta Enter sulgemiseks...")
             return
 
         # Ava kandideerimisvorm
-        print(f"\n➡️   Avan vormi: {kandideerimis_url}")
+        log(f"\n➡️   Avan vormi: {kandideerimis_url}")
         await page.goto(kandideerimis_url, wait_until="domcontentloaded")
         await asyncio.sleep(1)
 
         # Tuvasta vormi tüüp
         url = page.url
         if "forms.gle" in url or "docs.google.com/forms" in url:
+            vormi_tüüp = "Google Forms"
             await taida_google_form(page)
         else:
+            vormi_tüüp = "Kohandatud vorm"
             await taida_kohandatud_vorm(page)
 
         # Küsi kasutajalt kinnitust enne esitamist
-        print("\n" + "=" * 55)
-        print("⚠️   PALUN KONTROLLI BRAUSER AKNAS KÕIK VÄLJAD ÜLE!")
-        print("=" * 55)
+        log("\n" + "=" * 55)
+        log("⚠️   PALUN KONTROLLI BRAUSER AKNAS KÕIK VÄLJAD ÜLE!")
+        log("=" * 55)
         kinnitus = input("\nKas esitan ankeedi? (jah/ei): ").strip().lower()
 
         if kinnitus in ["jah", "j", "yes", "y"]:
-            await esita_ankeet(page)
+            esitatud = await esita_ankeet(page)
         else:
-            print("❌  Esitamine tühistatud.")
+            log("❌  Esitamine tühistatud kasutaja poolt.", "WARN")
+
+        # ── Kokkuvõte ──────────────────────────────────
+        if esitatud:
+            kirjuta_kokkuvõte("EDUKAS", [
+                f"Kandidaat: {ANDMED['nimi']}",
+                f"Rühm 1: {ANDMED['ryhm_1']}",
+                f"Rühm 2: {ANDMED['ryhm_2']}",
+                f"Vorm: {vormi_tüüp}",
+                f"URL: {kandideerimis_url}",
+                "Ekraanitõmmis: kinnituskuva.png",
+            ])
+            log(f"\n📄  Täielik logi salvestatud: {LOG_FAIL}")
+        elif kinnitus not in ["jah", "j", "yes", "y"]:
+            kirjuta_kokkuvõte("TÜHISTATUD", [
+                "Kasutaja loobus esitamisest",
+                f"Vorm täidetud: {vormi_tüüp}",
+                f"URL: {kandideerimis_url or 'ei leitud'}",
+            ])
+        else:
+            kirjuta_kokkuvõte("EBAÕNNESTUS", [
+                "Esitamisnuppu ei leitud",
+                f"Vorm: {vormi_tüüp}",
+                f"URL: {kandideerimis_url}",
+                "Kontrolli käsitsi kinnituskuva.png",
+            ])
 
         input("\nVajuta Enter brauseri sulgemiseks...")
         await browser.close()
