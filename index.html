@@ -37,6 +37,21 @@
   .responsebox .response-body { background: #F0F6FF; padding: 10px 14px; font-size: 10.5pt; color: #444; }
   .table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; margin: 12px 0; }
   .table-wrap table { margin: 0; }
+  .prompt-rida { display: flex; align-items: flex-start; gap: 12px; padding: 10px 14px; border-bottom: 1px solid #E0F0EE; }
+  .prompt-rida:last-child { border-bottom: none; }
+  .prompt-rida:hover { background: #F0FAFA; }
+  .prompt-nr { min-width: 32px; height: 32px; background: #1A7A6E; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 10pt; flex-shrink: 0; margin-top: 2px; }
+  .prompt-sisu { flex: 1; }
+  .prompt-tekst { font-size: 10.5pt; color: #333; margin: 0 0 4px 0; }
+  .prompt-silt { display: inline-block; font-size: 8pt; padding: 1px 7px; border-radius: 10px; font-weight: bold; }
+  .silt-veeb { background: #E8F5F3; color: #1A7A6E; border: 1px solid #A8D8D2; }
+  .silt-code { background: #EEF2FF; color: #3B4FCC; border: 1px solid #B8C4F8; }
+  .silt-viga { background: #FFF3E0; color: #E65100; border: 1px solid #FFCC80; }
+  .prompt-loend { border: 1px solid #A8D8D2; border-radius: 6px; overflow: hidden; margin: 14px 0; }
+  @media (max-width: 480px) {
+    .prompt-nr { min-width: 26px; height: 26px; font-size: 9pt; }
+    .prompt-tekst { font-size: 9.5pt; }
+  }
 
   @media (max-width: 768px) {
     body { margin: 0; padding: 14px 16px; font-size: 10.5pt; }
@@ -80,6 +95,7 @@
     <a href="#skript" style="color:white;text-decoration:none;font-size:10pt;">Skript</a>
     <a href="#tulevik" style="color:white;text-decoration:none;font-size:10pt;">Tulevikuks</a>
     <a href="#kokkuvote" style="color:white;text-decoration:none;font-size:10pt;">Kokkuvõte</a>
+    <a href="#promptid" style="color:#A8D8D2;text-decoration:none;font-size:10pt;font-weight:bold;">Promptid ↓</a>
   </nav>
 </div>
 
@@ -865,6 +881,32 @@ malev2026/<br>
 </ul>
 
 
+<h2>Samm 29 — Kõik promptid järjest kuvamine</h2>
+
+<div class="promptbox">
+  <div class="prompt-header">Prompt 29: "tee lehele täiendus kõige lõppu tee promtide järjestikune kuvamine ja päisesse sinna otseviide"</div>
+  <div class="prompt-body">Kasutaja soovis, et kogu vestluse kõik promptid oleksid koos ühes kiiresti loetavas loendis lehe lõpus — ning et päises oleks otselink sinna navigeerimiseks. Üks lause, kaks konkreetset ülesannet.</div>
+</div>
+
+<div class="responsebox">
+  <div class="response-header">🤖 Claude'i vastus</div>
+  <div class="response-body">Claude lisas:<br><br>
+  <strong>1. Nav-link päisesse:</strong> "Promptid ↓" — eraldi värviga (heleroheline), viitab otse uuele sektsioonile<br>
+  <strong>2. Uus sektsioon lehe lõpus</strong> (peatükk 7) — kõik 29 prompti järjest, igal real:<br>
+  &nbsp;&nbsp;• Rohelise ringiga number<br>
+  &nbsp;&nbsp;• Prompti tekst<br>
+  &nbsp;&nbsp;• Silt: 🌐 Veeb / 💻 Claude Code / ⚠️ Viga<br>
+  <strong>3. Samm 29 lisatud</strong> koolitusmaterjali ja kokkuvõttesse</div>
+</div>
+
+<p><strong>Õppetund — kiire referentsvaade:</strong></p>
+<ul>
+  <li>Pika dokumendi lõppu lisatud kokkuvõte aitab lugejal kiiresti üle vaadata kogu töö</li>
+  <li>Päise navigatsioonilink võimaldab hüpata otse soovitud sektsiooni</li>
+  <li>Visuaalsed sildid (Veeb / Claude Code / Viga) annavad kiire konteksti ilma teksti lugemata</li>
+</ul>
+
+
 <!-- 3. PÕHIMÕTTED -->
 <h1 id="pohimotted">3. Kuidas Claude'iga tõhusalt suhelda — 7 põhimõtet</h1>
 
@@ -1000,6 +1042,7 @@ python malev_kandideerimine.py
   <li>GitHub Pages aktiveeriti — koolitusmaterjal on avalikult kättesaadav (Samm 26)</li>
   <li>Claude'ile anti püsiv reegel: täienda koolitusmaterjali pärast iga prompti (Samm 27)</li>
   <li>Koolitusleht tehti mobiilisõbralikuks — responsive CSS, nav wrap, tabelid keritavad (Samm 28)</li>
+  <li>Lisati kõigi 29 prompti järjestikune loend koos siltidega ja otselink päisesse (Samm 29)</li>
 </ol>
 
 <br>
@@ -1020,8 +1063,221 @@ python malev_kandideerimine.py
 <p style="text-align:center; color:#1A7A6E; font-weight:bold;">Edu rakendamisel! 🌿</p>
 
 
+<!-- 7. KÕIK PROMPTID -->
+<h1 id="promptid">7. Kõik promptid järjest</h1>
+<p>Täielik loend kõigist 29 promptist ühes kohas — kiire ülevaade sellest, kuidas ülesanne lahendati algusest lõpuni.</p>
+<p><span class="prompt-silt silt-veeb">🌐 Veebisessioon</span> &nbsp; <span class="prompt-silt silt-code">💻 Claude Code</span> &nbsp; <span class="prompt-silt silt-viga">⚠️ Viga / sündmus</span></p>
+
+<div class="prompt-loend">
+  <div class="prompt-rida">
+    <span class="prompt-nr">1</span>
+    <div class="prompt-sisu">
+      <p class="prompt-tekst">"Kas see leht on sinule loetav https://malev.ee/"</p>
+      <span class="prompt-silt silt-veeb">🌐 Veebisessioon</span>
+    </div>
+  </div>
+  <div class="prompt-rida">
+    <span class="prompt-nr">2</span>
+    <div class="prompt-sisu">
+      <p class="prompt-tekst">"Analüüsi selle lehe tehnilist teostust ja anna tagasisidet kas sa suudad sealseid avalduse esitamise vorme agendina täita"</p>
+      <span class="prompt-silt silt-veeb">🌐 Veebisessioon</span>
+    </div>
+  </div>
+  <div class="prompt-rida">
+    <span class="prompt-nr">3</span>
+    <div class="prompt-sisu">
+      <p class="prompt-tekst">"Õpilane saab homsest kell 16.00 alates alustada liitumist malevas osalemiseks... Kuna kehtib reegel kes ees see võitja, siis mul on vaja leida lahendus mis selles keskonnas tagaks võimalikult kiire avalduse ankeedi täitmise"</p>
+      <span class="prompt-silt silt-veeb">🌐 Veebisessioon</span>
+    </div>
+  </div>
+  <div class="prompt-rida">
+    <span class="prompt-nr">4</span>
+    <div class="prompt-sisu">
+      <p class="prompt-tekst">"Jah"</p>
+      <span class="prompt-silt silt-veeb">🌐 Veebisessioon</span>
+    </div>
+  </div>
+  <div class="prompt-rida">
+    <span class="prompt-nr">5</span>
+    <div class="prompt-sisu">
+      <p class="prompt-tekst">"Edastan õpilase vastused anaüüsi neid ning kontrolli kas kõik vastused on täidetud. [järgnes kogu ankeet]"</p>
+      <span class="prompt-silt silt-veeb">🌐 Veebisessioon</span>
+    </div>
+  </div>
+  <div class="prompt-rida">
+    <span class="prompt-nr">6</span>
+    <div class="prompt-sisu">
+      <p class="prompt-tekst">"Vanema telefin [vanema telefon] email [vanema.email@näide.ee] aadress [Aadress, Linn, Maakond]"</p>
+      <span class="prompt-silt silt-veeb">🌐 Veebisessioon</span>
+    </div>
+  </div>
+  <div class="prompt-rida">
+    <span class="prompt-nr">7</span>
+    <div class="prompt-sisu">
+      <p class="prompt-tekst">"Uah"</p>
+      <span class="prompt-silt silt-veeb">🌐 Veebisessioon</span>
+    </div>
+  </div>
+  <div class="prompt-rida">
+    <span class="prompt-nr">8</span>
+    <div class="prompt-sisu">
+      <p class="prompt-tekst">"Koosta mulle sellest ülessandest ühtne detailne samm sammult kokkuvöte mis sisaldab kõiki minu promte õpetamaks õpilast kuidas ise tulevikus claude code enda heaks ülessandeid täitma"</p>
+      <span class="prompt-silt silt-veeb">🌐 Veebisessioon</span>
+    </div>
+  </div>
+  <div class="prompt-rida">
+    <span class="prompt-nr">9</span>
+    <div class="prompt-sisu">
+      <p class="prompt-tekst">"Õppilane kasutab google docs keskkonda"</p>
+      <span class="prompt-silt silt-veeb">🌐 Veebisessioon</span>
+    </div>
+  </div>
+  <div class="prompt-rida">
+    <span class="prompt-nr">10</span>
+    <div class="prompt-sisu">
+      <p class="prompt-tekst">"Lisa dokumenti kõik minu promti käsud kaasa asvatus see promt selgitamaks kudas see õppematerjal loodi"</p>
+      <span class="prompt-silt silt-veeb">🌐 Veebisessioon</span>
+    </div>
+  </div>
+  <div class="prompt-rida">
+    <span class="prompt-nr">11</span>
+    <div class="prompt-sisu">
+      <p class="prompt-tekst">"Dokumendis on tundlikud isikuandmed eemalda kõik need andmed"</p>
+      <span class="prompt-silt silt-veeb">🌐 Veebisessioon</span>
+    </div>
+  </div>
+  <div class="prompt-rida">
+    <span class="prompt-nr">12</span>
+    <div class="prompt-sisu">
+      <p class="prompt-tekst">"Lisa dokumenti ka kõik sinu vastused mida sa minule kuvad kui ma annan sulle järgmise ülessande"</p>
+      <span class="prompt-silt silt-veeb">🌐 Veebisessioon</span>
+    </div>
+  </div>
+  <div class="prompt-rida">
+    <span class="prompt-nr">13</span>
+    <div class="prompt-sisu">
+      <p class="prompt-tekst">"Eile õhtul lõpetasime siin töö ning täna hommikul jätkame oma eksperimenti ja koolitusmaterjali. Järgmised ülessanded. 1. lisa kõikidele mõistetele mis ei ole õpilasele iseenesest mõistetav link mis eesti wikipeedias selgitab seda mõistet..."</p>
+      <span class="prompt-silt silt-veeb">🌐 Veebisessioon</span>
+    </div>
+  </div>
+  <div class="prompt-rida">
+    <span class="prompt-nr">14</span>
+    <div class="prompt-sisu">
+      <p class="prompt-tekst">"...muudame õppematerjali tagasi html formaati selliselt et me saame selle lisada minu Github-i uue repo alla nimega malev2026 ning tee vajalik juhend kuidas ma koolitusmaterjali saan interneti turvalikult avalikuks teha"</p>
+      <span class="prompt-silt silt-veeb">🌐 Veebisessioon</span>
+    </div>
+  </div>
+  <div class="prompt-rida">
+    <span class="prompt-nr">15</span>
+    <div class="prompt-sisu">
+      <p class="prompt-tekst">"...tee mulle juhend kuidas ma Pythoni skripti saan tõsta oma claude code terminali ning kas on selle sama sammuga võimalik ka githubi malev2026 leht panna tööle läbi terminali"</p>
+      <span class="prompt-silt silt-veeb">🌐 Veebisessioon</span>
+    </div>
+  </div>
+  <div class="prompt-rida">
+    <span class="prompt-nr">16</span>
+    <div class="prompt-sisu">
+      <p class="prompt-tekst">"sa pead ka jätkama koolitusmaterjali koostamist nende ja ka edaspidiste tegevuste kohta samas formaadis"</p>
+      <span class="prompt-silt silt-veeb">🌐 Veebisessioon</span>
+    </div>
+  </div>
+  <div class="prompt-rida">
+    <span class="prompt-nr">17</span>
+    <div class="prompt-sisu">
+      <p class="prompt-tekst">"loe mälu mis ülessanded sul on ootel ja raporteeri minule"</p>
+      <span class="prompt-silt silt-code">💻 Claude Code</span>
+    </div>
+  </div>
+  <div class="prompt-rida">
+    <span class="prompt-nr">18</span>
+    <div class="prompt-sisu">
+      <p class="prompt-tekst">"sul on kataloogis kas .md faili analüüsi neid ning anna tagasisidet mida sa järgmiseks sammuks tegemapead"</p>
+      <span class="prompt-silt silt-code">💻 Claude Code</span>
+    </div>
+  </div>
+  <div class="prompt-rida">
+    <span class="prompt-nr">19</span>
+    <div class="prompt-sisu">
+      <p class="prompt-tekst">"fail malev_kandideerimine.py on lisatud kas juhend käsib sul ka koolitusmaterjali jätkata nii nagu seda sai claude webis tehtud?"</p>
+      <span class="prompt-silt silt-code">💻 Claude Code</span>
+    </div>
+  </div>
+  <div class="prompt-rida">
+    <span class="prompt-nr">20</span>
+    <div class="prompt-sisu">
+      <p class="prompt-tekst">"1. jah 2. ja asendame plasihoidjatega sriptis ning loome turvalise andmebaasi mis ei lähe vastuollu gdpr-i nõuetega paku selleks mulle lahendused eelnevalt välja"</p>
+      <span class="prompt-silt silt-code">💻 Claude Code</span>
+    </div>
+  </div>
+  <div class="prompt-rida">
+    <span class="prompt-nr">21</span>
+    <div class="prompt-sisu">
+      <p class="prompt-tekst">"v1 valime. 1 asenda 2 loo lahendus 3 dokumenteeri"</p>
+      <span class="prompt-silt silt-code">💻 Claude Code</span>
+    </div>
+  </div>
+  <div class="prompt-rida">
+    <span class="prompt-nr">22</span>
+    <div class="prompt-sisu">
+      <p class="prompt-tekst">"Looks like you launched a headed browser without having a XServer running" — skripti käivitusviga</p>
+      <span class="prompt-silt silt-viga">⚠️ Viga / sündmus</span>
+    </div>
+  </div>
+  <div class="prompt-rida">
+    <span class="prompt-nr">23</span>
+    <div class="prompt-sisu">
+      <p class="prompt-tekst">"mida ma nüüd teen"</p>
+      <span class="prompt-silt silt-code">💻 Claude Code</span>
+    </div>
+  </div>
+  <div class="prompt-rida">
+    <span class="prompt-nr">24</span>
+    <div class="prompt-sisu">
+      <p class="prompt-tekst">"salvesta mälu ja tee õppematerjali täiendused"</p>
+      <span class="prompt-silt silt-code">💻 Claude Code</span>
+    </div>
+  </div>
+  <div class="prompt-rida">
+    <span class="prompt-nr">25</span>
+    <div class="prompt-sisu">
+      <p class="prompt-tekst">"nüüd liigume koolitusmaterjali githubi pagena nähtavaks tegemisele"</p>
+      <span class="prompt-silt silt-code">💻 Claude Code</span>
+    </div>
+  </div>
+  <div class="prompt-rida">
+    <span class="prompt-nr">26</span>
+    <div class="prompt-sisu">
+      <p class="prompt-tekst">GitHub Pages aktiveerimine — repo Settings → Pages → Branch: main → Save</p>
+      <span class="prompt-silt silt-viga">⚠️ Viga / sündmus</span>
+    </div>
+  </div>
+  <div class="prompt-rida">
+    <span class="prompt-nr">27</span>
+    <div class="prompt-sisu">
+      <p class="prompt-tekst">"jäta meelde et alati pärast minu promti teed sa ka koolituslehele täienduse"</p>
+      <span class="prompt-silt silt-code">💻 Claude Code</span>
+    </div>
+  </div>
+  <div class="prompt-rida">
+    <span class="prompt-nr">28</span>
+    <div class="prompt-sisu">
+      <p class="prompt-tekst">"leht ei ole mobiili sõbralik muuda see leht mobiili vaatest ka mugavalt loetavaks"</p>
+      <span class="prompt-silt silt-code">💻 Claude Code</span>
+    </div>
+  </div>
+  <div class="prompt-rida">
+    <span class="prompt-nr">29</span>
+    <div class="prompt-sisu">
+      <p class="prompt-tekst">"tee lehele täiendus kõige lõppu tee promtide järjestikune kuvamine ja päisesse sinna otseviide"</p>
+      <span class="prompt-silt silt-code">💻 Claude Code</span>
+    </div>
+  </div>
+</div>
+
+<br>
+
 <div style="background:#1A7A6E;color:white;text-align:center;padding:20px;margin-top:40px;font-family:Arial;font-size:10pt;">
-  <p>Koostatud Claude AI abil · Tallinna Õpilasmalev 2026 · 
+  <p>Koostatud Claude AI abil · Tallinna Õpilasmalev 2026 ·
   <a href="https://claude.ai" style="color:#A8D8D2;">claude.ai</a></p>
   <p style="font-size:9pt;opacity:0.8;">Kõik isikuandmed on eemaldatud vastavalt GDPR nõuetele</p>
 </div>
