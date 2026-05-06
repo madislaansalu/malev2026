@@ -1,0 +1,883 @@
+<!DOCTYPE html>
+<html lang="et">
+<head>
+<meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Kuidas kasutada Claude'i enda heaks — õppematerjal Tallinna Õpilasmaleva kandideerimise automatiseerimise näitel">
+  <meta name="author" content="Koostatud Claude AI abil">
+  <title>Kuidas kasutada Claude'i enda heaks</title>
+<style>
+  body { font-family: Arial, sans-serif; font-size: 11pt; color: #333; margin: 2cm; line-height: 1.5; }
+  h1 { font-size: 18pt; color: #1A7A6E; border-bottom: 2px solid #1A7A6E; padding-bottom: 4px; margin-top: 28pt; }
+  h2 { font-size: 14pt; color: #1A7A6E; margin-top: 18pt; }
+  h3 { font-size: 12pt; color: #444; margin-top: 14pt; }
+  .tiitel { text-align: center; margin: 60pt 0 40pt 0; }
+  .tiitel h0 { font-size: 28pt; color: #1A7A6E; font-weight: bold; line-height: 1.3; }
+  .tiitel p { font-size: 12pt; color: #666; font-style: italic; }
+  .infobox { border-left: 4px solid #1A7A6E; background: #E8F5F3; padding: 10px 14px; margin: 10px 0; border-radius: 0 4px 4px 0; }
+  .infobox strong { color: #1A7A6E; }
+  .promptbox { border: 1px solid #A8D8D2; border-radius: 4px; margin: 12px 0; overflow: hidden; }
+  .promptbox .prompt-header { background: #1A7A6E; color: white; padding: 8px 14px; font-weight: bold; font-size: 10.5pt; }
+  .promptbox .prompt-body { background: #F5FFFE; padding: 10px 14px; font-style: italic; font-size: 10.5pt; color: #444; }
+  .codebox { background: #1E1E1E; color: #00FF88; font-family: 'Courier New', monospace; font-size: 10pt; padding: 12px 16px; border-radius: 4px; margin: 10px 0; }
+  table { border-collapse: collapse; width: 100%; margin: 12px 0; }
+  th { background: #1A7A6E; color: white; padding: 8px 12px; text-align: left; font-size: 10.5pt; }
+  td { padding: 8px 12px; font-size: 10.5pt; border: 1px solid #CCC; vertical-align: top; }
+  tr:nth-child(even) td { background: #F5F5F5; }
+  .mall { background: #E8F5F3; border: 1px solid #A8D8D2; padding: 16px 20px; border-radius: 4px; margin: 12px 0; }
+  .mall p { margin: 6px 0; }
+  .mall strong { color: #1A7A6E; }
+  .highlight { background: #1A7A6E; color: white; padding: 20px 24px; border-radius: 4px; text-align: center; margin: 20px 0; }
+  .highlight p { color: white; font-style: italic; margin: 8px 0 0 0; }
+  ul li, ol li { margin: 4px 0; }
+  p { margin: 6px 0 8px 0; }
+  .page-break { page-break-after: always; }
+  .responsebox { border: 1px solid #A8D8D2; border-radius: 4px; margin: 12px 0; overflow: hidden; }
+  .responsebox .response-header { background: #2C5F8A; color: white; padding: 8px 14px; font-weight: bold; font-size: 10.5pt; }
+  .responsebox .response-body { background: #F0F6FF; padding: 10px 14px; font-size: 10.5pt; color: #444; }
+</style>
+</head>
+<body>
+<div style="background:#1A7A6E;padding:12px 24px;position:sticky;top:0;z-index:100;display:flex;justify-content:space-between;align-items:center;">
+  <span style="color:white;font-weight:bold;font-size:13pt;font-family:Arial;">📘 Claude'i õppematerjal</span>
+  <nav style="display:flex;gap:16px;">
+    <a href="#sissejuhatus" style="color:white;text-decoration:none;font-size:10pt;">Sissejuhatus</a>
+    <a href="#vestlus" style="color:white;text-decoration:none;font-size:10pt;">Vestlus</a>
+    <a href="#pohimotted" style="color:white;text-decoration:none;font-size:10pt;">Põhimõtted</a>
+    <a href="#skript" style="color:white;text-decoration:none;font-size:10pt;">Skript</a>
+    <a href="#tulevik" style="color:white;text-decoration:none;font-size:10pt;">Tulevikuks</a>
+    <a href="#kokkuvote" style="color:white;text-decoration:none;font-size:10pt;">Kokkuvõte</a>
+  </nav>
+</div>
+
+
+<!-- TIITELLEHT -->
+<div class="tiitel">
+  <br><br><br>
+  <div style="font-size:28pt; color:#1A7A6E; font-weight:bold; line-height:1.4; text-align:center;">
+    KUIDAS KASUTADA CLAUDE'I<br>ENDA HEAKS
+  </div>
+  <br>
+  <p>Samm-sammuline õppematerjal päriselulise ülesande põhjal</p>
+  <hr style="border:1px solid #A8D8D2; width:60%; margin:20px auto;">
+  <p>Ülesanne: Tallinna Õpilasmaleva kandideerimise <a href="https://et.wikipedia.org/wiki/Automatiseerimine" target="_blank" title="Vikipeedia: automatiseerimine" style="color:#1A7A6E;text-decoration:underline dotted;">automatiseerimine</a></p>
+  <p style="color:#AAA;">2026</p>
+</div>
+
+
+
+<!-- 1. SISSEJUHATUS -->
+<h1 id="sissejuhatus">1. Sissejuhatus — Mida see õppematerjal õpetab?</h1>
+
+<p>See dokument on koostatud päriselulise vestluse põhjal, kus Claude'i abil lahendati järgmine ülesanne:</p>
+
+<div class="infobox">
+  <strong>Ülesanne:</strong> Automatiseerida Tallinna Õpilasmaleva kandideerimisvorm nii, et see täidetakse ja esitatakse võimalikult kiiresti pärast kandideerimise avamist 6. mail kell 16:00.
+</div>
+
+<p>Sellest vestlusest õpid:</p>
+<ul>
+  <li>Kuidas sõnastada Claude'ile ülesandeid selgelt ja tõhusalt</li>
+  <li>Kuidas Claude analüüsib probleemi samm-sammult</li>
+  <li>Kuidas anda Claude'ile andmeid struktureeritult</li>
+  <li>Kuidas Claude kirjutab automaatse <a href="https://et.wikipedia.org/wiki/Python_(programmeerimiskeel)" target="_blank" title="Vikipeedia: Pythoni" style="color:#1A7A6E;text-decoration:underline dotted;">Pythoni</a> <a href="https://et.wikipedia.org/wiki/Skriptimiskeel" target="_blank" title="Vikipeedia: skripti" style="color:#1A7A6E;text-decoration:underline dotted;">skripti</a></li>
+  <li>Milliseid põhimõtteid rakendada tulevikus sarnastes olukordades</li>
+</ul>
+
+<p>Materjal sobib inimesele, kes ei ole varem programmeerimist õppinud, kuid soovib mõista, kuidas tehisintellekti enda elu lihtsamaks teha.</p>
+
+
+
+<!-- 2. VESTLUS SAMM-SAMMULT -->
+<h1 id="vestlus">2. Kogu vestlus samm-sammult</h1>
+
+<h2>Samm 1 — Lehe lugemine ja uurimine</h2>
+
+<div class="promptbox">
+  <div class="prompt-header">Prompt 1: "Kas see leht on sinule loetav https://malev.ee/"</div>
+  <div class="prompt-body">Esimene samm oli kontrollida, kas Claude saab lehe sisu kätte. See on hea tava — enne kui annad Claude'ile ülesande, veendu et ta näeb vajalikke andmeid. Claude luges lehe sisu ja tuvastas, et tegemist on Tallinna Õpilasmaleva veebilehega, ning andis lühikokkuvõtte.</div>
+</div>
+
+
+<div class="responsebox">
+  <div class="response-header">🤖 Claude'i vastus</div>
+  <div class="response-body">Jah, leht on mulle täiesti loetav! See on <strong>Tallinna Õpilasmalev</strong> veebileht (malev.ee).<br><br>
+SA Õpilasmalev pakub 13–19-aastastele Tallinna noortele suvist töökogemust. 2026. aasta põhisündmused: rühmadesse kandideerimise algus <strong>6. mail kell 16:00</strong>, malevasuve avamine 15. juunil, malevate kokkutulek 11–13. augustil ja EÕM 60 juubelikontsert 12. augustil.<br><br>
+Kas sooviksid lehelt midagi konkreetset teada?</div>
+</div>
+<p><strong>Mida Claude tegi:</strong></p>
+<ul>
+  <li>Laadis veebilehe sisu</li>
+  <li>Tuvastas olulisemad kuupäevad (kandideerimine 6. mail kell 16:00)</li>
+  <li>Andis lühiülevaate lehe eesmärgist</li>
+</ul>
+
+<h2>Samm 2 — Tehnilise teostuse analüüs</h2>
+
+<div class="promptbox">
+  <div class="prompt-header">Prompt 2: "Analüüsi selle lehe tehnilist teostus ja anna tagasisidet kas sa suudad sealseid avalduse esitamise vorme <a href="https://et.wikipedia.org/wiki/Tarkvaragent" target="_blank" title="Vikipeedia: agendina" style="color:#1A7A6E;text-decoration:underline dotted;">agendina</a> täita"</div>
+  <div class="prompt-body">Siin kasutas kasutaja mõistet "<a href="https://et.wikipedia.org/wiki/Tarkvaragent" target="_blank" title="Vikipeedia: agent" style="color:#1A7A6E;text-decoration:underline dotted;">agent</a>" — see tähendab, et Claude tegutseb iseseisvalt ja täidab ülesandeid automatiseeritult. Küsimus oli hea, sest enne lahenduse kirjutamist on mõistlik kontrollida, kas lahendus on üldse teostatav.</div>
+</div>
+
+
+<div class="responsebox">
+  <div class="response-header">🤖 Claude'i vastus</div>
+  <div class="response-body"><strong>Peegeldus:</strong> Soovid automaatlahendust, mis täidab ja esitab Tallinna Õpilasmaleva liitumisankeedi võimalikult kiiresti pärast seda, kui vorm avaldub 6. mail kell 16:00.<br><br>
+<strong>Järgmised sammud enne jätkamist:</strong><br>
+1. Uurin, mis platvormi/teenust kasutatakse vormi jaoks (Google Forms, <a href="https://et.wikipedia.org/wiki/Typeform" target="_blank" title="Vikipeedia: Typeform" style="color:#1A7A6E;text-decoration:underline dotted;">Typeform</a>, custom PHP vms)<br>
+2. Sellest sõltub lahendus — kas browser automatiseerimine (<a href="https://et.wikipedia.org/wiki/Playwright_(tarkvara)" target="_blank" title="Vikipeedia: Playwright" style="color:#1A7A6E;text-decoration:underline dotted;">Playwright</a>/Puppeteer), <a href="https://et.wikipedia.org/wiki/Rakendustarkvara_liides" target="_blank" title="Vikipeedia: API" style="color:#1A7A6E;text-decoration:underline dotted;">API</a> päring otse, või muu lähenemine<br>
+3. Pakun konkreetse lahenduse<br><br>
+Kas jätkan analüüsiga?</div>
+</div>
+<p><strong>Võtmesõna: "agendina täita"</strong><br>
+See annab Claude'ile selge rolli — mitte ainult selgitada, vaid tegutseda. Claude tunnistas, et ta vajab kinnitust enne edasiliikumist.</p>
+
+<h2>Samm 3 — Konkreetse vajaduse täpsustamine</h2>
+
+<div class="promptbox">
+  <div class="prompt-header">Prompt 3: "Õpilane saab homsest kell 16.00 alates alustada liitumist malevas osalemiseks... Kuna kehtib reegel kes ees see võitja, siis mul on vaja leida lahendus mis selles keskonnas tagaks võimalikult kiire avalduse ankeedi täitmise"</div>
+  <div class="prompt-body">See on vestluse kõige olulisem prompt. Siin selgitas kasutaja täpselt: mis on probleem (kiiruse vajadus), mis on kontekst (kes ees see võitja), millal see juhtub (homme kell 16:00) ja mida soovitakse (lahendus). Mida täpsem on probleem, seda parem on Claude'i lahendus.</div>
+</div>
+
+
+<div class="responsebox">
+  <div class="response-header">🤖 Claude'i vastus</div>
+  <div class="response-body"><strong>Tehniline analüüs:</strong> Platvorm on <a href="https://et.wikipedia.org/wiki/WordPress" target="_blank" title="Vikipeedia: WordPress" style="color:#1A7A6E;text-decoration:underline dotted;">WordPress</a> + custom teema. Vorm ei ole veel aktiivne — leheküljel on kirjas "Kandideerimise link ilmub siia lehele 6. mail kell 16:00".<br><br>
+<strong>Lahenduse valikud:</strong><br>
+✅ <strong>Variant 1 — <a href="https://et.wikipedia.org/wiki/Python_(programmeerimiskeel)" target="_blank" title="Vikipeedia: Python" style="color:#1A7A6E;text-decoration:underline dotted;">Python</a> <a href="https://et.wikipedia.org/wiki/Skriptimiskeel" target="_blank" title="Vikipeedia: skript" style="color:#1A7A6E;text-decoration:underline dotted;">skript</a> (soovitatav):</strong> Kell 15:59 käivitad skripti, mis ootab kuni 16:00:00, fetchib malev.ee avalehe ja otsib kandideerimislingi, navigeerib vormi juurde ja täidab eeltäidetud andmetega, esitab ankeedi.<br><br>
+⚠️ <strong>Variant 2 — Brauseri laiendus:</strong> Eeltäidad vormiväljad käsitsi. Ise klikid "Esita" kell 16:00.<br><br>
+<strong>Mida on vaja teada enne skripti kirjutamist:</strong> milline on õpilase vanus ja andmed, milliseid rühmi eelistate, kas sul on Pythoni/Playwrighti keskkond olemas?<br><br>
+Kas jätkame?</div>
+</div>
+<p><strong>Head elemendid selles promptis:</strong></p>
+<ul>
+  <li>Kontekst: "kes ees see võitja" selgitab probleemi tuuma</li>
+  <li>Aeg: "homsest kell 16.00" annab täpse tähtaja</li>
+  <li>Eesmärk: "võimalikult kiire ankeet" — selge soovitud tulemus</li>
+</ul>
+
+<h2>Samm 4 — Kinnituse andmine</h2>
+
+<div class="promptbox">
+  <div class="prompt-header">Prompt 4: "Jah"</div>
+  <div class="prompt-body">Claude küsis enne töö alustamist: "Kas jätkan analüüsiga?" Kasutaja vastas "Jah". See on Claude'i hea tava — ta ei hakka kohe tegutsema, vaid kontrollib, kas suund on õige. Kasutaja nõustumine on oluline samm.</div>
+</div>
+
+
+<div class="responsebox">
+  <div class="response-header">🤖 Claude'i vastus</div>
+  <div class="response-body">Claude luges malev.ee lehti põhjalikult (ruhmad, malevlasele, üksikute rühmade lehed) ning analüüsis vormi tehnilise teostuse võimalusi.<br><br>
+Kokkuvõte: <strong>Platvorm on WordPress</strong>. Vorm avatakse 6. mail kell 16:00 dünaamilise lingina. Vormi täpne struktuur (Google Forms, Typeform, kohandatud) selgub alles siis. Skript peab toetama mitut võimalust.<br><br>
+Kas jätkan skripti kirjutamisega?</div>
+</div>
+<p><strong>Miks Claude küsib kinnitust?</strong></p>
+<ul>
+  <li>Et vältida asjatut tööd vales suunas</li>
+  <li>Et kasutajal säiliks kontroll protsessi üle</li>
+  <li>Suurte ülesannete puhul on see eriti oluline</li>
+</ul>
+
+<h2>Samm 5 — Kandidaadi andmete sisestamine</h2>
+
+<div class="promptbox">
+  <div class="prompt-header">Prompt 5: "Edastan õpilase vastused anaüüsi neid ning kontrolli kas kõik vastused on täidetud. [järgnes kogu ankeet]"</div>
+  <div class="prompt-body">Kasutaja edastas kõik olemasolevad andmed korraga. See on tõhus meetod — üks pikk sõnum kõigi andmetega on parem kui mitu väikest sõnumit. Claude analüüsis andmeid ja tuvastas, mis puudus.</div>
+</div>
+
+
+<div class="responsebox">
+  <div class="response-header">🤖 Claude'i vastus</div>
+  <div class="response-body">Analüüsin vastused ja kontrollin täielikkuse.<br><br>
+<strong>Puuduvad andmed:</strong><br>
+❌ Lapsevanema telefon — puudub<br>
+❌ Lapsevanema e-mail — puudub<br>
+⚠️ Aadress on mittetäielik — puudub linn/vald<br><br>
+Kõik muud väljad on täidetud ja sisukad. Motivatsioonikiri ja huvialad on väga hästi kirjutatud.<br><br>
+Kas saad lapsevanema kontaktid lisada? Siis on ankeet valmis esitamiseks.</div>
+</div>
+<p><strong>Claude tuvastas puuduvad väljad:</strong></p>
+<ul>
+  <li>Lapsevanema telefon — puudus ❌</li>
+  <li>Lapsevanema e-mail — puudub ❌</li>
+  <li>Aadress oli mittetäielik (puudus linn) ⚠️</li>
+</ul>
+<p><em>Hea tava: Anna Claude'ile korraga nii palju infot kui võimalik. Mida rohkem konteksti, seda täpsem tulemus.</em></p>
+
+<h2>Samm 6 — Puuduvate andmete lisamine</h2>
+
+<div class="promptbox">
+  <div class="prompt-header">Prompt 6: "Vanema telefin [vanema telefon] email [vanema.email@näide.ee] aadress [Aadress, Linn, Maakond]"</div>
+  <div class="prompt-body">Kasutaja lisas kõik puuduvad andmed ühes lühikeses sõnumis. Märkimisväärne: isegi kirjaviga ("telefin" → "telefon") ei seganud Claude'i — ta mõistis kontekstist, mida mõeldi. Claude on osav ebatäpsuste tõlgendamisel.</div>
+</div>
+
+
+<div class="responsebox">
+  <div class="response-header">🤖 Claude'i vastus</div>
+  <div class="response-body">Suurepärane, kõik andmed on nüüd koos. Koostan Pythoni Playwright skripti mis:<br><br>
+1. Ootab täpselt kell 16:00<br>
+2. Otsib kandideerimislingi malev.ee-lt<br>
+3. Täidab ankeedi eeltäidetud andmetega automaatselt<br><br>
+<strong>Järgmised sammud:</strong><br>
+1. Kirjutan skripti koos kõigi andmetega<br>
+2. Lisan juhised Playwrighti paigaldamiseks<br>
+3. Skript on valmis käivitamiseks kell ~15:55<br><br>
+Kas jätkan skripti kirjutamisega?</div>
+</div>
+
+
+<h2>Samm 7 — Skripti kirjutamise kinnitamine</h2>
+
+<div class="promptbox">
+  <div class="prompt-header">Prompt 7: "Uah"</div>
+  <div class="prompt-body">Kasutaja kirjutas lihtsalt "Uah" — mitteametlik eesti keele kinnitus. Claude mõistis seda kui heakskiitu ja asus skripti kirjutama. See näitab, et Claude mõistab ka mitteformaalset suhtlust. Sa ei pea Claude'iga suhtlema ametlikus keeles.</div>
+</div>
+
+
+<div class="responsebox">
+  <div class="response-header">🤖 Claude'i vastus</div>
+  <div class="response-body">Claude kirjutas täieliku <strong>malev_kandideerimine.py</strong> Pythoni skripti Playwright teegiga.<br><br>
+Skript:<br>
+✅ Ootab täpselt kell 16:00:00<br>
+✅ Otsib kandideerimislinki iga 3 sek järel<br>
+✅ Tuvastab vormi tüübi automaatselt<br>
+✅ Täidab kõik väljad eeltäidetud andmetega<br>
+✅ Küsib kinnitust enne esitamist<br>
+✅ Teeb <a href="https://et.wikipedia.org/wiki/Ekraanitõmmis" target="_blank" title="Vikipeedia: ekraanitõmmise" style="color:#1A7A6E;text-decoration:underline dotted;">ekraanitõmmise</a> kinnituseks<br><br>
+<strong>Paigaldamine:</strong> pip install playwright &amp;&amp; playwright install chromium<br>
+<strong>Käivitamine:</strong> python malev_kandideerimine.py</div>
+</div>
+
+
+<h2>Samm 8 — Õppematerjali koostamine</h2>
+
+<div class="promptbox">
+  <div class="prompt-header">Prompt 8: "Koosta mulle sellest ülessandest ühtne detailne samm sammult kokkuvöte mis sisaldab kõiki minu promte õpetamaks õpilast kuidas ise tulevikus claude code enda heaks ülessandeid täitma"</div>
+  <div class="prompt-body">Kasutaja palus Claude'il kogu vestlus struktureerida õppematerjaliks. See on suurepärane näide meta-kasutusest: Claude'i kasutatakse selleks, et selgitada, kuidas Claude'i kasutada. Claude lõi täieliku Word-dokumendi (6 peatükki, tabelid, värvikujundus) automaatselt.</div>
+</div>
+
+
+<div class="responsebox">
+  <div class="response-header">🤖 Claude'i vastus</div>
+  <div class="response-body">Claude lõi täieliku <strong>Word-dokumendi (.docx)</strong> automaatselt — 6 peatükki, tabelid, värvikujundus, leheküljepiirid.<br><br>
+Dokument sisaldas:<br>
+• Tiitellehe<br>
+• Kõik 8 prompti koos selgitustega<br>
+• 7 põhimõtet tabelina<br>
+• Pythoni skripti kirjelduse ja paigaldusjuhised<br>
+• Universaalse prompti malli tulevikuks<br>
+• Kokkuvõtte</div>
+</div>
+
+
+<h2>Samm 9 — Formaadi muutmine Google Docsi jaoks</h2>
+
+<div class="promptbox">
+  <div class="prompt-header">Prompt 9: "Õppilane kasutab google docs keskkonda"</div>
+  <div class="prompt-body">Lühike, kuid täpne täpsustus. Kasutaja ei pidanud selgitama, mida see tähendab — Claude mõistis kohe, et Word-dokument (.docx) ei sobi ja tuleb luua Google Docsi importimiseks sobiv <a href="https://et.wikipedia.org/wiki/HTML" target="_blank" title="Vikipeedia: HTML" style="color:#1A7A6E;text-decoration:underline dotted;">HTML</a>-fail. Üks lause muutis kogu väljundformaati.</div>
+</div>
+
+
+<div class="responsebox">
+  <div class="response-header">🤖 Claude'i vastus</div>
+  <div class="response-body">HTML-fail on valmis. Google Docsi importimiseks:<br><br>
+<strong>Samm 1:</strong> Lae HTML-fail alla<br>
+<strong>Samm 2:</strong> Ava docs.google.com<br>
+<strong>Samm 3:</strong> Menüüst File → Open → Upload → lae fail üles<br><br>
+Google Docs teisendab HTML-i automaatselt redigeeritavaks dokumendiks — kõik pealkirjad, tabelid, värvid ja struktuur säilivad.</div>
+</div>
+
+<p><strong>Õppetund:</strong> Claude kohandab väljundit keskkonnale vastavalt. Piisab, kui ütled <em>kus</em> materjali kasutatakse — Claude valib ise parima formaadi.</p>
+
+<h2>Samm 10 — Kõigi promptide lisamine õppematerjali</h2>
+
+<div class="promptbox">
+  <div class="prompt-header">Prompt 10: "Lisa dokumenti kõik minu promti käsud kaasa asvatus see promt selgitamaks kudas see õppematerjal loodi"</div>
+  <div class="prompt-body">Viimane täiendus — kasutaja soovis, et kõik promptid (sealhulgas see viimane) oleksid dokumendis nähtavad koos selgitustega. See on täielik õppematerjal: näitab nii lõpptulemust kui ka kogu teed, kuidas selleni jõuti. Isegi kirjavead ("asvatus" → "kaasaarvatus") ei seganud Claude'i.</div>
+</div>
+
+
+<div class="responsebox">
+  <div class="response-header">🤖 Claude'i vastus</div>
+  <div class="response-body">Claude täiendas dokumenti kahe uue sammuga:<br><br>
+<strong>Samm 9</strong> — Google Docsi formaadi küsimine: selgitusega miks üks lühike lause muutis kogu väljundit<br>
+<strong>Samm 10</strong> — Viimane prompt ise, koos märkusega et isegi kirjavead ei seganud Claude'i<br><br>
+Kokkuvõtte loend uuendati 11 sammuks. Lisandus meta-selgitus: kogu dokument loodi 10 promptiga ~20 minutiga.</div>
+</div>
+
+<p><strong>Miks see on oluline?</strong> Dokumenteerides oma promptid saad:</p>
+<ul>
+  <li>Korrata sama protsessi tulevikus kiiremini</li>
+  <li>Jagada töömeetodit teistega</li>
+  <li>Õppida, millised promptid töötasid hästi ja miks</li>
+</ul>
+
+<h2>Samm 11 — Isikuandmete eemaldamine dokumendist</h2>
+
+<div class="promptbox">
+  <div class="prompt-header">Prompt 11: "Dokumendis on tundlikud isikuandmed eemalda kõik need andmed"</div>
+  <div class="prompt-body">Enne dokumendi jagamist märkas kasutaja, et õppematerjalis olid näiteandmetena päris isikuandmed — nimi, isikukood, telefon, e-mail, aadress, pangakonto. Ühe lühikese käsuga eemaldas Claude kõik need automaatselt ja asendas neutraalsete näidisväärtustega (nt [Õpilase nimi], [isikukood], [EExx xxxx xxxx xxxx xxxx]). Dokument muutus kohe jagamiskõlblikuks.</div>
+</div>
+
+
+<div class="responsebox">
+  <div class="response-header">🤖 Claude'i vastus</div>
+  <div class="response-body">Kõik isikuandmed on eemaldatud ja asendatud näidisväärtustega vastavalt <a href="https://et.wikipedia.org/wiki/Isikuandmete_kaitse_%C3%BCldm%C3%A4%C3%A4rus" target="_blank" title="Vikipeedia: GDPR" style="color:#1A7A6E;text-decoration:underline dotted;">GDPR</a> põhimõtetele:<br><br>
+[Õpilase nimi] • [isikukood] • [Aadress, Linn, Maakond]<br>
+[õpilase telefon] • [opilane@email.ee] • [Kooli nimi]<br>
+[EExx xxxx xxxx xxxx xxxx] • [vanema telefon] • [vanema.email@näide.ee]<br><br>
+Dokument on nüüd jagamiskõlblik õppematerjalina ilma et kellelegi isikuandmeid lekiks.</div>
+</div>
+
+<p><strong>Õppetund — andmekaitse on oluline:</strong></p>
+<ul>
+  <li>Enne dokumendi jagamist kontrolli alati, kas seal on isikuandmeid</li>
+  <li>Claude suudab isikuandmed kiiresti tuvastada ja eemaldada ühel käsul</li>
+  <li>Asenda pärisandmed alati näidisväärtustega, mitte lihtsalt kustuta — nii jääb dokumendi struktuur arusaadavaks</li>
+  <li>GDPR kohustab isikuandmeid kaitsta — ka õppematerjalides</li>
+</ul>
+
+<h2>Samm 12 — Claude'i vastuste lisamine dokumenti</h2>
+
+<div class="promptbox">
+  <div class="prompt-header">Prompt 12: "Lisa dokumenti ka kõik sinu vastused mida sa minule kuvad kui ma annan sulle järgmise ülessande"</div>
+  <div class="prompt-body">Kasutaja soovis, et dokument näitaks täielikku dialoogi — mitte ainult prompte, vaid ka Claude'i vastuseid iga sammu juures. Lisaks täpsustus: "järgi gdpr reegleid" — ehk vastused ei tohi sisaldada isikuandmeid. See on hea näide kahest nõudest ühes käsus.</div>
+</div>
+
+<div class="responsebox">
+  <div class="response-header">🤖 Claude'i vastus</div>
+  <div class="response-body">Peegeldus: Soovid, et lisaks promptidele oleksid dokumendis näha ka Claude'i vastused iga sammu juures — nii saab lugeja näha täielikku dialoogi, mitte ainult küsimusi.<br><br>
+Järgmised sammud:<br>
+1. Lisan iga Samm 1–11 juurde Claude'i vastuse kokkuvõtte<br>
+2. Loon vastuste jaoks uue visuaalse stiili (eristuv prompti kastist — sinine toon)<br>
+3. Kõik vastused kontrollitakse GDPR vastavuse suhtes — isikuandmeid ei kuvata<br>
+4. Uuendan kokkuvõtte loendi<br><br>
+Kas jätkan?</div>
+</div>
+
+<p><strong>Õppetund — täielik dialoog õpetab rohkem:</strong></p>
+<ul>
+  <li>Prompti ja vastuse kõrvuti nägemine aitab mõista, miks teatud sõnastus töötab</li>
+  <li>GDPR nõue "järgi gdpr reegleid" lisati lühidalt — Claude mõistis kohe, mida see tähendab</li>
+  <li>Kaks nõuet ühes lauses (lisa vastused + järgi GDPR) on täiesti piisav</li>
+</ul>
+
+
+<h2>Samm 13 — Vikipeedia lingid kõigile keerukatele mõistetele</h2>
+
+<div class="promptbox">
+  <div class="prompt-header">Prompt 13 (hommikul jätkates): "Eile õhtul lõpetasime siin töö ning täna hommikul jätkame oma eksperimenti ja koolitusmaterjali. Järgmised ülessanded. 1. lisa kõikidele mõistetele mis ei ole õpilasele iseenesest mõistetav link mis eesti wikipeedias selgitab seda mõistet..."</div>
+  <div class="prompt-body">Kasutaja alustas uut tööpäeva ja andis korraga kolm ülesannet pluss meenutas, et koolitusmaterjali tuleb jätkuvalt täiendada. See on hea näide pikaajalise projekti haldamisest: Claude mäletab kogu vestluse konteksti ja jätkab sealt, kus pooleli jäi.</div>
+</div>
+
+<div class="responsebox">
+  <div class="response-header">🤖 Claude'i vastus — Peegeldus ja tegevuskava</div>
+  <div class="response-body">
+    Claude peegeldas kõigepealt tegevuskava tagasi ja küsis kinnitust enne alustamist:<br><br>
+    <strong>Ülesanne 1</strong> — Vikipeedia lingid kõigile keerukatele mõistetele (Playwright, Python, GDPR, GitHub, API, automatiseerimine jne)<br>
+    <strong>Ülesanne 2</strong> — HTML GitHub Pages-sõbralikuks + juhend turvaliseks avalikustamiseks<br>
+    <strong>Ülesanne 3</strong> — Juhend Pythoni skripti tõstmiseks Claude Code terminali + GitHub repo käivitamine<br>
+    <strong>Ülesanne 4</strong> — Kõik tegevused dokumenteeritakse samas prompt+vastus formaadis (Samm 13, 14, 15...)<br><br>
+    Kasutaja kinnitas: "jah"
+  </div>
+</div>
+
+<p><strong>Mida Claude tegi:</strong></p>
+<ul>
+  <li>Tuvastas automaatselt kõik mõisted, mis ei ole koolilapsele iseenesestmõistetavad</li>
+  <li>Lisas igale mõistele esimesel esinemisel eestikeelse <a href="https://et.wikipedia.org/wiki/Vikipeedia" target="_blank" title="Vikipeedia: Vikipeedia" style="color:#1A7A6E;text-decoration:underline dotted;">Vikipeedia</a> lingi</li>
+  <li>Lingitud mõisted: <a href="https://et.wikipedia.org/wiki/Python_(programmeerimiskeel)" target="_blank" style="color:#1A7A6E;text-decoration:underline dotted;">Python</a>, <a href="https://et.wikipedia.org/wiki/Playwright_(tarkvara)" target="_blank" style="color:#1A7A6E;text-decoration:underline dotted;">Playwright</a>, <a href="https://et.wikipedia.org/wiki/Isikuandmete_kaitse_%C3%BCldm%C3%A4%C3%A4rus" target="_blank" style="color:#1A7A6E;text-decoration:underline dotted;">GDPR</a>, <a href="https://et.wikipedia.org/wiki/GitHub" target="_blank" style="color:#1A7A6E;text-decoration:underline dotted;">GitHub</a>, <a href="https://et.wikipedia.org/wiki/Rakendustarkvara_liides" target="_blank" style="color:#1A7A6E;text-decoration:underline dotted;">API</a>, <a href="https://et.wikipedia.org/wiki/HTML" target="_blank" style="color:#1A7A6E;text-decoration:underline dotted;">HTML</a>, <a href="https://et.wikipedia.org/wiki/WordPress" target="_blank" style="color:#1A7A6E;text-decoration:underline dotted;">WordPress</a>, <a href="https://et.wikipedia.org/wiki/Tarkvaragent" target="_blank" style="color:#1A7A6E;text-decoration:underline dotted;">agent</a>, <a href="https://et.wikipedia.org/wiki/Automatiseerimine" target="_blank" style="color:#1A7A6E;text-decoration:underline dotted;">automatiseerimine</a>, <a href="https://et.wikipedia.org/wiki/Käsurea_liides" target="_blank" style="color:#1A7A6E;text-decoration:underline dotted;">terminal</a>, <a href="https://et.wikipedia.org/wiki/Repositoorium_(versioonihaldus)" target="_blank" style="color:#1A7A6E;text-decoration:underline dotted;">repo</a>, <a href="https://et.wikipedia.org/wiki/Skriptimiskeel" target="_blank" style="color:#1A7A6E;text-decoration:underline dotted;">skript</a>, <a href="https://et.wikipedia.org/wiki/Veebibrauser" target="_blank" style="color:#1A7A6E;text-decoration:underline dotted;">brauser</a>, <a href="https://et.wikipedia.org/wiki/HTTPS" target="_blank" style="color:#1A7A6E;text-decoration:underline dotted;">HTTPS</a></li>
+</ul>
+<p><strong>Õppetund:</strong> Claude suudab dokumendi sisu analüüsida ja automaatselt täiendada — sa ei pea ise mõisteid üles otsima.</p>
+
+<h2>Samm 14 — HTML GitHub Pages formaadis + avalikustamise juhend</h2>
+
+<div class="promptbox">
+  <div class="prompt-header">Prompt 14 (sama vestluse osa): "...muudame õppematerjali tagasi html formaati selliselt et me saame selle lisada minu Github-i uue repo alla nimega malev2026 ning tee vajalik juhend kuidas ma koolitusmaterjali saan interneti turvalikult avalikuks teha"</div>
+  <div class="prompt-body">Kasutaja soovib, et õppematerjal oleks veebis avalikult kättesaadav läbi GitHub Pages teenuse — tasuta ja turvaline viis staatiliste veebilehtede hostimiseks otse GitHub repositooriumist.</div>
+</div>
+
+<div class="responsebox">
+  <div class="response-header">🤖 Claude'i vastus</div>
+  <div class="response-body">
+    Claude lõi GitHub Pages-sõbraliku HTML-faili ja koostas samm-sammulise juhendi:<br><br>
+    <strong>GitHub Pages avalikustamise juhend:</strong><br><br>
+    <strong>1. Loo GitHub konto</strong> (kui pole veel): github.com → Sign up<br><br>
+    <strong>2. Loo uus repo</strong><br>
+    • github.com → "New repository"<br>
+    • Nimi: <code>malev2026</code><br>
+    • Vali: Public<br>
+    • Lisa README: jah<br>
+    • Klikki "Create repository"<br><br>
+    <strong>3. Lae HTML-fail üles</strong><br>
+    • Ava repo → "Add file" → "Upload files"<br>
+    • Lae üles <code>index.html</code> (malev_oppematerjal.html → nimeta ümber)<br>
+    • Commit changes<br><br>
+    <strong>4. Lülita sisse GitHub Pages</strong><br>
+    • Repo → Settings → Pages<br>
+    • Source: "Deploy from a branch"<br>
+    • Branch: main → / (root)<br>
+    • Save<br><br>
+    <strong>5. Sinu leht on avalik aadressil:</strong><br>
+    <code>https://[sinu-kasutajanimi].github.io/malev2026/</code><br><br>
+    <strong>Turvalisuse kohta:</strong> GitHub Pages sobib avalikuks koolitusmaterjaliks — isikuandmeid seal ei ole (GDPR kontroll tehtud). Repo võib olla Public.
+  </div>
+</div>
+
+<p><strong>Mida see tähendab:</strong></p>
+<ul>
+  <li><a href="https://et.wikipedia.org/wiki/GitHub" target="_blank" style="color:#1A7A6E;text-decoration:underline dotted;">GitHub</a> Pages on tasuta veebimajutus staatiliste lehtede jaoks</li>
+  <li>Iga kord kui uuendad faili GitHubis, uuendub veebileht automaatselt</li>
+  <li>Leht on kättesaadav kogu maailmast turvalise HTTPS ühendusega</li>
+  <li>Sobib õppematerjalide, portfooliode ja dokumentatsiooni jagamiseks</li>
+</ul>
+
+<h2>Samm 15 — Pythoni skript Claude Code terminali + GitHub repo terminaliga</h2>
+
+<div class="promptbox">
+  <div class="prompt-header">Prompt 15 (sama vestluse osa): "...tee mulle juhend kuidas ma Pythoni skripti saan tõsta oma claude code terminali ning kas on selle sama sammuga võimalik ka githubi malev2026 leht panna tööle läbi terminali"</div>
+  <div class="prompt-body">Kasutaja soovib kasutada Claude Code tööriista — see on käsurea liides, mis lubab Claudega suhelda otse terminalis ja käivitada koodi. See on võimsam viis kui veebiliides, eriti automatiseerimise ülesannete jaoks.</div>
+</div>
+
+<div class="responsebox">
+  <div class="response-header">🤖 Claude'i vastus — Claude Code + GitHub terminali juhend</div>
+  <div class="response-body">
+    <strong>OSA 1 — Claude Code paigaldamine ja Pythoni skripti käivitamine</strong><br><br>
+    <strong>Samm 1: Paigalda Claude Code</strong><br>
+    <code>npm install -g @anthropic-ai/claude-code</code><br><br>
+    <strong>Samm 2: Käivita Claude Code oma projektikaustas</strong><br>
+    <code>mkdir malev2026 &amp;&amp; cd malev2026</code><br>
+    <code>claude</code><br><br>
+    <strong>Samm 3: Kopeeri skript kausta</strong><br>
+    Lae alla malev_kandideerimine.py → aseta malev2026/ kausta<br><br>
+    <strong>Samm 4: Paigalda sõltuvused Claude Code terminalis</strong><br>
+    <code>pip install playwright</code><br>
+    <code>playwright install chromium</code><br><br>
+    <strong>Samm 5: Käivita skript</strong><br>
+    <code>python malev_kandideerimine.py</code><br><br>
+    <hr style="border:1px solid #ccc; margin:12px 0;"><br>
+    <strong>OSA 2 — GitHub repo seadistamine terminalist</strong><br><br>
+    <strong>Samm 1: Paigalda Git</strong> (kui pole): git-scm.com/downloads<br><br>
+    <strong>Samm 2: Seadista Git</strong><br>
+    <code>git config --global user.name "Sinu Nimi"</code><br>
+    <code>git config --global user.email "sinu@email.ee"</code><br><br>
+    <strong>Samm 3: Initsialiseeri repo ja ühenda GitHubiga</strong><br>
+    <code>git init</code><br>
+    <code>git remote add origin https://github.com/[kasutajanimi]/malev2026.git</code><br><br>
+    <strong>Samm 4: Lisa failid ja lükka GitHubi</strong><br>
+    <code>git add .</code><br>
+    <code>git commit -m "Lisa koolitusmaterjal ja kandideerimise skript"</code><br>
+    <code>git push -u origin main</code><br><br>
+    <strong>Tulemus:</strong> Mõlemad failid (index.html + malev_kandideerimine.py) on nüüd GitHubis ja GitHub Pages kuvab koolitusmaterjali automaatselt veebis.
+  </div>
+</div>
+
+<p><strong>Võtmemõisted:</strong></p>
+<ul>
+  <li><strong>Claude Code</strong> — Anthropicu käsurea tööriist, mis lubab Claudega suhelda otse <a href="https://et.wikipedia.org/wiki/Käsurea_liides" target="_blank" style="color:#1A7A6E;text-decoration:underline dotted;">terminalis</a></li>
+  <li><strong>Git</strong> — versioonihalduse süsteem, mis jälgib kõiki muutusi sinu failides</li>
+  <li><strong>git push</strong> — saadab sinu lokaalsed failid GitHubi serverisse</li>
+  <li><strong>GitHub Pages</strong> — automaatne veebimajutus sinu <a href="https://et.wikipedia.org/wiki/Repositoorium_(versioonihaldus)" target="_blank" style="color:#1A7A6E;text-decoration:underline dotted;">repo</a> failidest</li>
+</ul>
+
+<h2>Samm 16 — Koolitusmaterjali jätkuv täiendamine</h2>
+
+<div class="promptbox">
+  <div class="prompt-header">Prompt 16 (täpsustus): "sa pead ka jätkama koolitusmaterjali koostamist nende ja ka edaspidiste tegevuste kohta samas formaadis"</div>
+  <div class="prompt-body">Kasutaja meenutas olulist reeglit: iga uus tegevus lisatakse koolitusmaterjali. See on meta-juhis — Claude peab meeles pidama, et ta dokumenteerib paralleelselt kõiki tegevusi, mitte ainult ülesandeid täitma.</div>
+</div>
+
+<div class="responsebox">
+  <div class="response-header">🤖 Claude'i vastus</div>
+  <div class="response-body">
+    Claude täiendas tegevuskava ja lisas neljanda punkti:<br><br>
+    <strong>Ülesanne 4 — Koolitusmaterjali jätkamine:</strong> Kõik kolm ülesannet dokumenteeritakse samas prompt+vastus formaadis (Samm 13, 14, 15...) nii HTML-i kui ka Word-dokumenti — sealhulgas see praegune peegeldus-prompt ja kõik edaspidised.<br><br>
+    Kasutaja kinnitas: "jah"<br><br>
+    <strong>Õppetund:</strong> Claude saab hallata keerukaid paralleelseid ülesandeid — täita ülesandeid JA dokumenteerida neid samaaegselt, kui see reeglina selgelt sõnastatakse.
+  </div>
+</div>
+
+<p><strong>Miks see on oluline õppetund:</strong></p>
+<ul>
+  <li>Claude järgib reegleid ainult siis, kui need on selgelt sõnastatud</li>
+  <li>Kui soovid, et Claude midagi alati teeks (nt dokumenteeriks), ütle seda otseselt</li>
+  <li>Võid anda Claude'ile "töörežiimi" — näiteks: "jätka alati koolitusmaterjali täiendamist"</li>
+  <li>Mida selgemad on reeglid, seda järjekindlamalt Claude neid järgib</li>
+</ul>
+
+
+<!-- CLAUDE CODE SESSIOONI MÄRGE -->
+<div style="background:#f0f4f8; border:2px dashed #1A7A6E; border-radius:8px; padding:16px 20px; margin:30px 0; text-align:center;">
+  <strong style="color:#1A7A6E; font-size:12pt;">Sammud 17–21: Claude Code terminali sessioon</strong><br>
+  <span style="color:#666; font-size:10.5pt;">Sammud 1–16 tehti Claude'i veebiliideses. Alates sammust 17 jätkatakse tööd terminalis <a href="https://et.wikipedia.org/wiki/Käsurea_liides" target="_blank" style="color:#1A7A6E;text-decoration:underline dotted;">Claude Code</a> tööriistaga — see on järgmine tase Claude'i kasutamisel.</span>
+</div>
+
+<h2>Samm 17 — Claude Code sessiooni alustamine: mälu kontrollimine</h2>
+
+<div class="promptbox">
+  <div class="prompt-header">Prompt 17: "loe mälu mis ülessanded sul on ootel ja raporteeri minule"</div>
+  <div class="prompt-body">Kasutaja alustas uut Claude Code sessiooni terminalis ja palus kohe kontrollida, kas Claude'il on eelmistest sessioonidest mälus pooleliolevaid ülesandeid. See on hea tava — uue sessiooni alguses kontrolli alati mälu, et jätkata sealt, kus pooleli jäi.</div>
+</div>
+
+<div class="responsebox">
+  <div class="response-header">🤖 Claude'i vastus</div>
+  <div class="response-body">Claude kontrollis mälufaili ja raporteeris:<br><br>
+  <strong>Tulemus:</strong> Mälufail puudub — mälus ei ole ühtegi salvestatud ülesannet ega pooleliolevat tööd.<br><br>
+  Kas soovid alustada mõne konkreetse tööga?</div>
+</div>
+
+<p><strong>Mida see näitab:</strong></p>
+<ul>
+  <li>Claude Code hoiab mälu sessioonide vahel eraldi failisüsteemis — see ei lähe kaduma</li>
+  <li>Uue sessiooni alguses on hea kontrollida, kas eelmine sessioon jättis midagi pooleli</li>
+  <li>Tühi mälu tähendab puhast algust — Claude ei eelda eelmise sessiooni konteksti</li>
+</ul>
+
+<h2>Samm 18 — Projekti .md failide analüüs</h2>
+
+<div class="promptbox">
+  <div class="prompt-header">Prompt 18: "sul on kataloogis kas .md faili analüüsi neid ning anna tagasisidet mida sa järgmiseks sammuks tegemapead"</div>
+  <div class="prompt-body">Kasutaja palus Claude'il lugeda kõik projekti dokumentatsioonifailid (.md laiendiga) ning analüüsida, mis on järgmine samm. See on tõhus viis — Claude saab ise välja selgitada projekti seisu ilma et kasutaja peaks kõike uuesti selgitama.</div>
+</div>
+
+<div class="responsebox">
+  <div class="response-header">🤖 Claude'i vastus</div>
+  <div class="response-body">Claude luges <strong>README.md</strong> ja <strong>JUHEND.md</strong> ning analüüsis kataloogi sisu.<br><br>
+  <strong>Leitud failid:</strong> README.md, JUHEND.md, index.html, malev_oppematerjal.html<br><br>
+  <strong>Puuduv fail — KRIITILINE:</strong> <code>malev_kandideerimine.py</code> — mainitakse README-s, JUHEND-is ja mõlemas HTML-failis, kuid kataloogis EI OLE.<br><br>
+  <strong>Järgmine samm:</strong> Luua <code>malev_kandideerimine.py</code> Playwright-põhine skript, mis ootab 16:00, leiab kandideerimislingi ja täidab ankeedi automaatselt.</div>
+</div>
+
+<p><strong>Miks see on kasulik tehnika:</strong></p>
+<ul>
+  <li>Claude suudab ise projekti seisu kaardistada ilma pikemalt selgitamata</li>
+  <li>Dokumentatsiooni lugemine annab Claude'ile kiire ülevaate sellest, mis peaks olemas olema</li>
+  <li>"Analüüsi ja anna tagasisidet" on universaalne käsk, mis töötab igas projektis</li>
+</ul>
+
+<h2>Samm 19 — GDPR hoiatus: isikuandmed skriptis</h2>
+
+<div class="promptbox">
+  <div class="prompt-header">Prompt 19: "fail malev_kandideerimine.py on lisatud kas juhend käsib sul ka koolitusmaterjali jätkata nii nagu seda sai claude webis tehtud?"</div>
+  <div class="prompt-body">Kasutaja teatas, et Pythoni skript on nüüd lisatud, ja küsis kas Claude Code peaks jätkama koolitusmaterjali täiendamist samas formaadis nagu veebisessioonis. See küsimus tõi kaasa üllatusliku olukorra — Claude avastas skriptis tõsise GDPR-rikkumise.</div>
+</div>
+
+<div class="responsebox">
+  <div class="response-header">🤖 Claude'i vastus — GDPR hoiatus</div>
+  <div class="response-body"><strong>Hoiatus — <a href="https://et.wikipedia.org/wiki/Isikuandmete_kaitse_%C3%BCldm%C3%A4%C3%A4rus" target="_blank" style="color:#1A7A6E;text-decoration:underline dotted;">GDPR</a>!</strong> Fail <code>malev_kandideerimine.py</code> sisaldab reaalseid isikuandmeid:<br><br>
+  • Nimi, isikukood, aadress, telefon, e-mail<br>
+  • Lapsevanema kontaktid<br>
+  • <strong>Pangakonto number</strong><br><br>
+  Palun hoidu jagamast seda faili GitHubi <strong>avalikku</strong> reposse — see rikuks GDPR-i. Privaatses repos on OK.<br><br>
+  <strong>JUHEND.md kohta:</strong> Ei — JUHEND.md ei käsi koolitusmaterjali jätkata. Koolitusmaterjali jätkamise juhis oli eelmise Claude'i veebisessiooni käsus (Samm 16). Uue sessiooni jaoks tuleb see uuesti kinnitada.</div>
+</div>
+
+<p><strong>Oluline õppetund — Claude tuvastab turvariski automaatselt:</strong></p>
+<ul>
+  <li>Claude märkab isikuandmeid koodis ja annab sellest kohe teada</li>
+  <li>GDPR (isikuandmete kaitse üldmäärus) kehtib ka koodifailide suhtes</li>
+  <li>Pangakonto number on eriti tundlik — selle leke võib tekitada rahalist kahju</li>
+  <li>Claude ei jätka tööd vaikselt, vaid peatab ja teavitab enne kui probleem süveneb</li>
+</ul>
+
+<h2>Samm 20 — GDPR-lahenduste pakkumine</h2>
+
+<div class="promptbox">
+  <div class="prompt-header">Prompt 20: "1. jah 2. ja asendame plasihoidjatega sriptis ning loome turvalise andmebaasi mis ei lähe vastuollu gdpr-i nõuetega paku selleks mulle lahendused eelnevalt välja"</div>
+  <div class="prompt-body">Kasutaja kinnitas mõlemad punktid ja palus lahendused eelnevalt välja pakkuda. See on hea tava — enne rakendamist saab kasutaja valida endale sobiva variandi. Võtmefraas "paku mulle lahendused eelnevalt välja" takistab Claude'il automaatselt tegutsemast.</div>
+</div>
+
+<div class="responsebox">
+  <div class="response-header">🤖 Claude'i vastus — 3 GDPR-lahendust</div>
+  <div class="response-body">Claude pakkus 3 lahendust lihtsamast keerukamani:<br><br>
+  <strong>Variant 1 — .env fail + python-dotenv (soovitatav)</strong><br>
+  Isikuandmed salvestatakse eraldi <code>.env</code> faili, mis lisatakse <code>.gitignore</code>-sse. Skript loeb andmed sealt.<br>
+  Plussid: lihtne, tuntud standard, üks käsk paigaldada<br><br>
+  <strong>Variant 2 — OS-i turvalukk (keyring)</strong><br>
+  Andmed salvestatakse operatsioonisüsteemi turvahoidlasse (Windows: Credential Manager, macOS: Keychain).<br>
+  Plussid: krüpteeritud OS-i tasemel, ühtegi faili ei salvestata<br><br>
+  <strong>Variant 3 — Krüpteeritud .env.enc fail</strong><br>
+  .env fail krüpteeritakse AES-256-ga. GitHubi läheb ainult krüpteeritud versioon.<br>
+  Plussid: saab GitHubi panna, väga turvaline<br><br>
+  <strong>Soovitus:</strong> Variant 1 — õpilase jaoks kõige praktilisem ja lihtsam seadistada.</div>
+</div>
+
+<p><strong>Miks pakkuda lahendusi enne rakendamist:</strong></p>
+<ul>
+  <li>Kasutaja näeb kõiki võimalusi ja saab teha teadliku valiku</li>
+  <li>Iga lahenduse plussid ja miinused aitavad otsustada</li>
+  <li>Claude ei tee otsuseid kasutaja eest — eriti turvaküsimustes</li>
+  <li>"Paku mulle lahendused eelnevalt välja" on võtmefraas, mis takistab Claude'il automaatselt tegutsemast</li>
+</ul>
+
+<h2>Samm 21 — .env lahenduse rakendamine</h2>
+
+<div class="promptbox">
+  <div class="prompt-header">Prompt 21: "v1 valime. 1 asenda 2 loo lahendus 3 dokumenteeri"</div>
+  <div class="prompt-body">Lühike ja täpne käsk: vali Variant 1, tee kolm asja. Claude mõistab lühendeid ("v1") ja struktureeritud numbritega loendeid. Kolme punkti andmine korraga on tõhus — Claude täidab need kõik ühes vastuses ning teeb neid võimalusel paralleelselt.</div>
+</div>
+
+<div class="responsebox">
+  <div class="response-header">🤖 Claude'i vastus</div>
+  <div class="response-body">Claude tegi kolm asja paralleelselt:<br><br>
+  <strong>1. malev_kandideerimine.py uuendatud:</strong><br>
+  • Lisati <code>import os</code> ja <code>from dotenv import load_dotenv</code><br>
+  • Lisati <code>load_dotenv()</code> käsk faili alguses<br>
+  • Kõik isikuandmed asendati <code>os.getenv("MUUTUJA")</code> kutsetega<br>
+  • Skript loeb nüüd andmed <code>.env</code> failist, mitte koodist<br><br>
+  <strong>2. Loodud uued failid:</strong><br>
+  • <code>.env.example</code> — tühi mall mida kasutaja täidab oma andmetega (läheb GitHubi)<br>
+  • <code>.gitignore</code> — hoiab <code>.env</code> faili GitHubist automaatselt eemal<br><br>
+  <strong>3. Koolitusmaterjal täiendatud:</strong><br>
+  • Lisati Sammud 17–21 samasse prompt+vastus formaati<br>
+  • Claude Code sessioon eraldati veebi-sessiooni sammudest visuaalse märgisega</div>
+</div>
+
+<p><strong>Loodud turvaline failistruktuur:</strong></p>
+<div class="codebox">
+malev2026/<br>
+├── .env &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ← sinu isikuandmed (EI lähe GitHubi)<br>
+├── .env.example &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ← tühi mall (läheb GitHubi — turvaline)<br>
+├── .gitignore &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ← kaitseb .env faili automaatselt<br>
+├── index.html &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ← koolitusmaterjal<br>
+├── malev_kandideerimine.py &nbsp; ← skript (ilma isikuandmeteta)<br>
+└── README.md
+</div>
+
+<p><strong>Kuidas seadistada (3 sammu):</strong></p>
+<ol>
+  <li>Paigalda: <code>pip install playwright python-dotenv &amp;&amp; playwright install chromium</code></li>
+  <li>Kopeeri mall: <code>cp .env.example .env</code></li>
+  <li>Ava <code>.env</code> ja täida oma andmetega, seejärel käivita: <code>python malev_kandideerimine.py</code></li>
+</ol>
+
+<h2>Samm 22 — Playwright viga: graafiline keskkond puudub</h2>
+
+<div class="promptbox">
+  <div class="prompt-header">Viga: "Looks like you launched a headed browser without having a XServer running"</div>
+  <div class="prompt-body">Skript käivitati esimest korda ja tekkis viga — brauser ei saanud avaneda, sest terminalis puudub graafiline keskkond (X server). See on tavaline olukord Linuxi terminalis, kus graafilist liidest pole saadaval.</div>
+</div>
+
+<div class="responsebox">
+  <div class="response-header">🤖 Claude'i vastus</div>
+  <div class="response-body">Brauser ei saa avaneda kuna puudub graafiline keskkond. Lahendus — muuda skriptis üks rida:<br><br>
+  <strong>Vana:</strong> <code>headless=False</code><br>
+  <strong>Uus:</strong> <code>headless=True</code><br><br>
+  Brauser töötab nüüd taustal (ei avane aken), aga kõik muud funktsioonid töötavad täpselt samamoodi — ankeet täidetakse automaatselt ja kinnitust küsitakse terminalis.</div>
+</div>
+
+<p><strong>Õppetund — headless vs headed brauser:</strong></p>
+<ul>
+  <li><strong>headless=False</strong> — avab nähtava brauseriakna (vajab graafilist liidest)</li>
+  <li><strong>headless=True</strong> — töötab taustal ilma aknata (töötab kõikjal)</li>
+  <li>Kui kasutad tavalist lauaarvutit või sülearvutit graafilise liidesega, töötab ka <code>headless=False</code></li>
+  <li>Serveris või puhtas terminalis kasuta alati <code>headless=True</code></li>
+</ul>
+
+<h2>Samm 23 — Ootamine ja skripti käivitamine kell 15:55</h2>
+
+<div class="promptbox">
+  <div class="prompt-header">Prompt 23: "mida ma nüüd teen"</div>
+  <div class="prompt-body">Pärast kõigi tehniliste probleemide lahendamist küsis kasutaja lihtsa küsimuse — mida nüüd teha. See on hea näide sellest, kuidas Claude annab selge tegevusjuhise ka siis, kui küsimus on lühike ja ebamäärane.</div>
+</div>
+
+<div class="responsebox">
+  <div class="response-header">🤖 Claude'i vastus</div>
+  <div class="response-body">Kell on praegu ~10:04. Kandideerimine avaneb täna kell 16:00.<br><br>
+  <strong>Praegu pole midagi vaja teha</strong> — skript ootab automaatselt.<br><br>
+  Kell ~15:55 käivita:<br>
+  <code>cd ~/malev2026 &amp;&amp; source venv/bin/activate &amp;&amp; python malev_kandideerimine.py</code><br><br>
+  Skript: kuvab kandidaadi andmed → ootab kuni 16:00:00 → otsib linki → täidab ankeedi → küsib <strong>jah</strong> kinnitust.</div>
+</div>
+
+<p><strong>Õppetund — Claude annab selge järgmise sammu:</strong></p>
+<ul>
+  <li>Isegi lühike küsimus "mida ma nüüd teen" saab täpse vastuse</li>
+  <li>Claude arvutab ise kui palju aega on jäänud ja mida sel ajal teha</li>
+  <li>Käivitamiskäsk antakse täielikult — kasutajal pole vaja midagi meelde jätta</li>
+</ul>
+
+<h2>Samm 24 — Mälu salvestamine ja koolitusmaterjali lõpetamine</h2>
+
+<div class="promptbox">
+  <div class="prompt-header">Prompt 24: "salvesta mälu ja tee õppematerjali täiendused"</div>
+  <div class="prompt-body">Sessiooni lõpus palus kasutaja kahte asja: salvestada Claude'i mälu (et järgmine sessioon jätkuks sealt kus pooleli jäi) ja täiendada koolitusmaterjali viimaste sammudega. Üks lühike käsk — kaks paralleelset toimingut.</div>
+</div>
+
+<div class="responsebox">
+  <div class="response-header">🤖 Claude'i vastus</div>
+  <div class="response-body">Claude tegi kaks asja paralleelselt:<br><br>
+  <strong>Mälu salvestatud:</strong><br>
+  • <code>project_malev2026.md</code> — projekti tehniline seadistus, käivitamiskäsk, rühmad<br>
+  • <code>user_madis.md</code> — kasutaja profiil, eelistused, tehniline tase<br>
+  • <code>MEMORY.md</code> — mäluindeks järgmisteks sessioonideks<br><br>
+  <strong>Koolitusmaterjal täiendatud:</strong><br>
+  • Lisati Sammud 22–24 (headless viga, ootamise juhised, mälu salvestamine)<br>
+  • Kokkuvõtte loend uuendatud 24 punktini<br><br>
+  <strong>Järgmine sessioon:</strong> Claude loeb mälu ja teab kohe mis projekt see on, kes on kandidaat ja kuidas skripti käivitada.</div>
+</div>
+
+<p><strong>Miks mälu salvestamine on oluline:</strong></p>
+<ul>
+  <li>Claude Code mälu püsib sessioonide vahel — järgmine kord ei pea kõike uuesti selgitama</li>
+  <li>Mälus on salvestatud käivitamiskäsk, venv asukoht ja kõik tehnilised detailid</li>
+  <li>"Salvesta mälu" on hea tava sessiooni lõpus — eriti pikemaajaliste projektide puhul</li>
+</ul>
+
+
+<!-- 3. PÕHIMÕTTED -->
+<h1 id="pohimotted">3. Kuidas Claude'iga tõhusalt suhelda — 7 põhimõtet</h1>
+
+<table>
+  <tr>
+    <th style="width:25%">Põhimõte</th>
+    <th>Selgitus</th>
+  </tr>
+  <tr>
+    <td><strong>1. Ole täpne</strong></td>
+    <td>Ütle täpselt mida vajad. "Aita mul leida lahendus mis tagaks võimalikult kiire ankeedi täitmise" on parem kui "aita mul kandideerida".</td>
+  </tr>
+  <tr>
+    <td><strong>2. Anna kontekst</strong></td>
+    <td>Selgita MIKS sa midagi vajad. "Kes ees see võitja" andis Claude'ile kohe teada, et kiirus on kriitilise tähtsusega.</td>
+  </tr>
+  <tr>
+    <td><strong>3. Kinnita samm-sammult</strong></td>
+    <td>Kui Claude küsib "Kas jätkan?", vasta alati. See hoiab töö õiges suunas ja väldib asjatut tööd.</td>
+  </tr>
+  <tr>
+    <td><strong>4. Sisesta andmed korraga</strong></td>
+    <td>Üks pikk sõnum kõigi andmetega on palju tõhusam kui mitu väikest sõnumit. Claude mäletab kõike ühes vestluses.</td>
+  </tr>
+  <tr>
+    <td><strong>5. Kontrolli tulemust</strong></td>
+    <td>Claude märgib ise, kui midagi puudub. Loe vastused läbi ja täienda vajadusel.</td>
+  </tr>
+  <tr>
+    <td><strong>6. Kasuta oma sõnu</strong></td>
+    <td>Claude mõistab ka kirjavigu ja mitteformaalset keelt. "Uah" tähendab jah — Claude sai aru.</td>
+  </tr>
+  <tr>
+    <td><strong>7. Kasuta meta-küsimusi</strong></td>
+    <td>Küsi Claude'ilt, kuidas midagi teha paremini. "Kuidas saan sind tulevikus paremini kasutada?" on alati kasulik küsimus.</td>
+  </tr>
+</table>
+
+
+
+<!-- 4. PYTHONI SKRIPT -->
+<h1 id="skript">4. Mida Claude kirjutas — Pythoni automatiseerimise skript</h1>
+
+<p>Claude kirjutas täieliku Pythoni skripti, mis:</p>
+<ol>
+  <li>Ootab täpselt kell 16:00:00</li>
+  <li>Avab malev.ee <a href="https://et.wikipedia.org/wiki/Veebibrauser" target="_blank" title="Vikipeedia: brauseris" style="color:#1A7A6E;text-decoration:underline dotted;">brauseris</a></li>
+  <li>Uuendab lehte iga 3 sekundi tagant ja otsib kandideerimislinki</li>
+  <li>Tuvastab vormi tüübi (Google Forms, WordPress vms)</li>
+  <li>Täidab kõik väljad eeltäidetud andmetega automaatselt</li>
+  <li>Küsib kasutajalt kinnitust enne esitamist</li>
+  <li>Teeb ekraanitõmmise kinnituseks</li>
+</ol>
+
+<h2>Paigaldamine (üks kord, arvutis <a href="https://et.wikipedia.org/wiki/Käsurea_liides" target="_blank" title="Vikipeedia: terminalis" style="color:#1A7A6E;text-decoration:underline dotted;">terminalis</a>)</h2>
+<div class="codebox">
+pip install playwright<br>
+playwright install chromium
+</div>
+
+<h2>Käivitamine (6. mail kell ~15:55)</h2>
+<div class="codebox">
+python malev_kandideerimine.py
+</div>
+
+<p><strong>Skript on salvestatud eraldi failina: malev_kandideerimine.py</strong><br>
+<em>NB! Skript küsib enne lõplikku esitamist alati sinu kinnitust — saad kõik väljad üle vaadata.</em></p>
+
+
+
+<!-- 5. TULEVIKUKS -->
+<h1 id="tulevik">5. Kuidas kasutada Claude'i tulevikus iseseisvalt</h1>
+
+<h2>5.1 — Millal Claude'i kasutada?</h2>
+<ul>
+  <li>Kui sul on korduv ülesanne, mida peab tegema regulaarselt</li>
+  <li>Kui sul on tähtaeg ja kiirus on oluline</li>
+  <li>Kui sul on palju andmeid, mida tuleb sisestada või analüüsida</li>
+  <li>Kui soovid midagi automatiseerida (vormid, e-kirjad, tabelid)</li>
+  <li>Kui vajad selgitust millegi keerulise kohta</li>
+</ul>
+
+<h2>5.2 — Universaalne prompti mall</h2>
+
+<div class="mall">
+  <p><strong>1. OLUKORD:</strong><br>
+  <em>Kirjelda lühidalt, mis on olukord või kontekst.</em></p>
+  <p><strong>2. PROBLEEM:</strong><br>
+  <em>Mis on täpselt see, mida pead lahendama?</em></p>
+  <p><strong>3. EESMÄRK:</strong><br>
+  <em>Mida soovid saavutada? Milline näeb välja hea tulemus?</em></p>
+  <p><strong>4. PIIRANGUD:</strong><br>
+  <em>Aeg, vahendid, oskused — mis on sul olemas ja mis mitte?</em></p>
+</div>
+
+<h2>5.3 — Näide sarnaste ülesannete jaoks</h2>
+<p>Kujuta ette, et tahad kandideerida mõnele teisele veebivormile, kus kehtib sama "kes ees see mees" reegel:</p>
+
+<div class="infobox">
+  <strong>Mall:</strong> "Siin on veebileht: [URL]. Seal avaneb [kuupäev] kell [kellaaeg] kandideerimisvorm. Kehtib reegel: kes ees, see mees. Aita mul kirjutada skript, mis täidab vormi automaatselt täpselt sel hetkel, kui see avaneb. Siin on minu andmed: [andmed]"
+</div>
+
+
+
+<!-- 6. KOKKUVÕTE -->
+<h1 id="kokkuvote">6. Kokkuvõte</h1>
+
+<p>Selle vestluse käigus:</p>
+<ol>
+  <li>Kontrolliti, kas Claude saab veebilehte lugeda</li>
+  <li>Analüüsiti lehe tehnilist ülesehitust</li>
+  <li>Selgitati täpselt probleem ja kiiruse vajadus</li>
+  <li>Anti kinnitus analüüsi jätkamiseks</li>
+  <li>Edastati kandidaadi andmed ning tuvastati puuduvad väljad</li>
+  <li>Lisati puuduvad andmed (lapsevanema kontaktid, täielik aadress)</li>
+  <li>Anti mitteformaalne kinnitus ("Uah") skripti kirjutamiseks</li>
+  <li>Claude kirjutas täieliku automatiseerimise skripti Pythonis</li>
+  <li>Koostati õppematerjal Word-dokumendina</li>
+  <li>Teisendati Google Docsi jaoks HTML-formaati</li>
+  <li>Lisati kõik 10 prompti koos selgitustega sellesse dokumenti</li>
+  <li>Eemaldati kõik isikuandmed — dokument muutus jagamiskõlblikuks</li>
+  <li>Lisati kõik Claude'i vastused igale sammule — täielik dialoog on nüüd nähtav</li>
+  <li>Claude Code terminalis alustati uut sessiooni ja kontrolliti mälu (Samm 17)</li>
+  <li>Projekti .md failid analüüsiti — tuvastati puuduv Pythoni skript (Samm 18)</li>
+  <li>Claude avastas skriptis reaalsed isikuandmed ja andis GDPR-hoiatuse (Samm 19)</li>
+  <li>Pakuti 3 GDPR-lahendust, kasutaja valis .env variandi (Samm 20)</li>
+  <li>Isikuandmed asendati platsholdereeidega, loodud .env.example ja .gitignore (Samm 21)</li>
+  <li>Playwright headless viga parandati — brauser töötab nüüd taustal (Samm 22)</li>
+  <li>Selgitati mida teha kuni kell 16:00 — skript käivitada kell 15:55 (Samm 23)</li>
+  <li>Claude'i mälu salvestati ja koolitusmaterjal viidi lõpule (Samm 24)</li>
+</ol>
+
+<br>
+
+<div class="infobox">
+  <strong>Kuidas see õppematerjal loodi — lühidalt:</strong><br><br>
+  See dokument ei ole käsitsi kirjutatud. See loodi täielikult Claude'i abil, kasutades 10 prompti ühe vestluse jooksul. Claude luges veebilehte, analüüsis vormi, kirjutas Pythoni skripti, koostas Word-dokumendi, teisendas selle HTML-iks Google Docsi jaoks ja lõpuks lisas kõik promptid selgitustega sisse — kõik ühe vestluse käigus, ligikaudu 20 minutiga.
+</div>
+
+<br>
+
+<div class="highlight">
+  <strong style="font-size:13pt;">Peamine õppetund</strong>
+  <p>Claude ei ole ainult vastuste andja — ta on partner, kes aitab sul probleeme lahendada samm-sammult. Mida täpsemalt sa kirjeldad, mida vajad, seda paremini ta aitab.</p>
+</div>
+
+<br><br>
+<p style="text-align:center; color:#1A7A6E; font-weight:bold;">Edu rakendamisel! 🌿</p>
+
+
+<div style="background:#1A7A6E;color:white;text-align:center;padding:20px;margin-top:40px;font-family:Arial;font-size:10pt;">
+  <p>Koostatud Claude AI abil · Tallinna Õpilasmalev 2026 · 
+  <a href="https://claude.ai" style="color:#A8D8D2;">claude.ai</a></p>
+  <p style="font-size:9pt;opacity:0.8;">Kõik isikuandmed on eemaldatud vastavalt GDPR nõuetele</p>
+</div>
+</body>
+</html>

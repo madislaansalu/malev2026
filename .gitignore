@@ -1,0 +1,13 @@
+# Isikuandmed — EI lähe GitHubi (GDPR)
+.env
+
+# Ekraanitõmmis (sisaldab vormi andmeid)
+kinnituskuva.png
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+
+# Virtuaalkeskkond
+venv/
