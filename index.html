@@ -881,6 +881,35 @@ malev2026/<br>
 </ul>
 
 
+<h2>Samm 30 — Tulemuste logimine faili ja kokkuvõtte lisamine</h2>
+
+<div class="promptbox">
+  <div class="prompt-header">Prompt 30: "jah lisa ning pärast scripti töö lõppemist lisa kokkuvõte loomulikult koolitusmaterjalidesse"</div>
+  <div class="prompt-body">Kasutaja küsis, kas skript teeb kokkuvõtte oma tulemustest. Claude vastas, et kokkuvõte on ainult terminalis. Kasutaja palus lisada failipõhise <a href="https://et.wikipedia.org/wiki/Logi_(arvutid)" target="_blank" style="color:#1A7A6E;text-decoration:underline dotted;">logimise</a> ja pärast skripti tööd lisada kokkuvõte ka koolitusmaterjali.</div>
+</div>
+
+<div class="responsebox">
+  <div class="response-header">🤖 Claude'i vastus</div>
+  <div class="response-body">Claude tegi kaks muudatust paralleelselt:<br><br>
+  <strong>1. <a href="https://et.wikipedia.org/wiki/Logi_(arvutid)" target="_blank" style="color:#2C5F8A;text-decoration:underline dotted;">Logimine</a> (malev_kandideerimine.py):</strong><br>
+  • Lisati <code>log()</code> abifunktsioon — kirjutab nii terminali kui <code>tulemus.log</code> faili<br>
+  • Lisati <code>kirjuta_kokkuvõte()</code> — struktureeritud kokkuvõte logi lõppu koos olek (EDUKAS / TÜHISTATUD / EBAÕNNESTUS), kandidaadi andmete ja URL-iga<br>
+  • Kõik <code>print()</code> kutsed asendati <code>log()</code>-ga<br>
+  • <code>esita_ankeet()</code> tagastab nüüd <code>True/False</code> — <code>main()</code> teab, kas esitamine õnnestus<br><br>
+  <strong>2. Koolitusmaterjal täiendatud:</strong><br>
+  • Lisati Samm 30 (see samm)<br>
+  • Promptide loend uuendatud<br><br>
+  <strong>Logi fail:</strong> <code>tulemus.log</code> luuakse skripti kaustas automaatselt. Iga käivitamine lisab uue sessiooni logi lõppu (ei kirjuta üle).</div>
+</div>
+
+<p><strong>Õppetund — logimine ja <a href="https://et.wikipedia.org/wiki/Auditij%C3%A4lg" target="_blank" style="color:#1A7A6E;text-decoration:underline dotted;">auditijälg</a>:</strong></p>
+<ul>
+  <li>Tähtsa <a href="https://et.wikipedia.org/wiki/Automatiseerimine" target="_blank" style="color:#1A7A6E;text-decoration:underline dotted;">automaatse</a> toimingu (nagu kandideerimine) puhul on <a href="https://et.wikipedia.org/wiki/Logi_(arvutid)" target="_blank" style="color:#1A7A6E;text-decoration:underline dotted;">logimine</a> hädavajalik — saad alati kontrollida, mis täpselt toimus</li>
+  <li><code>tulemus.log</code> lisatakse sessiooni kaupa — vanemad tulemused säilivad</li>
+  <li>Struktureeritud kokkuvõte (EDUKAS / TÜHISTATUD / EBAÕNNESTUS) on palju kasulikum kui lihtsalt "skript jooksis läbi"</li>
+  <li>Üks lühike küsimus ("kas see teeb kokkuvõtte?") viis tervikliku <a href="https://et.wikipedia.org/wiki/Auditij%C3%A4lg" target="_blank" style="color:#1A7A6E;text-decoration:underline dotted;">auditijäljeni</a></li>
+</ul>
+
 <h2>Samm 29 — Kõik promptid järjest kuvamine</h2>
 
 <div class="promptbox">
@@ -1269,6 +1298,13 @@ python malev_kandideerimine.py
     <span class="prompt-nr">29</span>
     <div class="prompt-sisu">
       <p class="prompt-tekst">"tee lehele täiendus kõige lõppu tee promtide järjestikune kuvamine ja päisesse sinna otseviide"</p>
+      <span class="prompt-silt silt-code">💻 Claude Code</span>
+    </div>
+  </div>
+  <div class="prompt-rida">
+    <span class="prompt-nr">30</span>
+    <div class="prompt-sisu">
+      <p class="prompt-tekst">"jah lisa ning pärast scripti töö lõppemist lisa kokkuvõte loomulikult koolitusmaterjalidesse"</p>
       <span class="prompt-silt silt-code">💻 Claude Code</span>
     </div>
   </div>
