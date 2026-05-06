@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Kuidas kasutada Claude'i enda heaks — õppematerjal Tallinna Õpilasmaleva kandideerimise automatiseerimise näitel">
   <meta name="author" content="Koostatud Claude AI abil">
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
   <title>Kuidas kasutada Claude'i enda heaks</title>
 <style>
   body { font-family: Arial, sans-serif; font-size: 11pt; color: #333; margin: 2cm; line-height: 1.5; }
@@ -1037,6 +1038,28 @@ malev2026/<br>
 </ul>
 
 
+<h2>Samm 36 — Favicon lisamine koolituslehele</h2>
+
+<div class="promptbox">
+  <div class="prompt-header">Prompt 36: "lisasin kausta faili favicon.ico lisa see koolituslehele"</div>
+  <div class="prompt-body">Kasutaja lisas käsitsi <code>favicon.ico</code> faili projekti kausta ja palus selle koolituslehega siduda. <a href="https://et.wikipedia.org/wiki/Favicon" target="_blank" style="color:#1A7A6E;text-decoration:underline dotted;">Favicon</a> on väike ikoon, mis kuvatakse brauseri vahelehe pealkirja kõrval.</div>
+</div>
+
+<div class="responsebox">
+  <div class="response-header">🤖 Claude'i vastus</div>
+  <div class="response-body">Claude kontrollis esmalt, et fail olemas on (<code>favicon.ico</code> leitud), seejärel lisas ühe rea <code>index.html</code> päisesse (<code>&lt;head&gt;</code>):<br><br>
+  <code>&lt;link rel="icon" type="image/x-icon" href="favicon.ico"&gt;</code><br><br>
+  Pärast GitHubi pushimist ilmub ikoon automaatselt brauseri vahelehel.</div>
+</div>
+
+<p><strong>Õppetund — väikesed viimistlusdetailid:</strong></p>
+<ul>
+  <li><a href="https://et.wikipedia.org/wiki/Favicon" target="_blank" style="color:#1A7A6E;text-decoration:underline dotted;">Favicon</a> lisatakse HTML <code>&lt;head&gt;</code> plokki ühe reaga — Claude teab täpse süntaksi</li>
+  <li>Claude kontrollis esmalt faili olemasolu enne muudatuse tegemist</li>
+  <li>Kasutaja lisas faili ise käsitsi — Claude'i ülesanne oli ainult HTML-i uuendada</li>
+</ul>
+
+
 <h2>Samm 29 — Kõik promptid järjest kuvamine</h2>
 
 <div class="promptbox">
@@ -1467,6 +1490,13 @@ python malev_kandideerimine.py
     <span class="prompt-nr">35</span>
     <div class="prompt-sisu">
       <p class="prompt-tekst">"täienda koolitusmaterjali ka see jäi sul tegemata promt 30 on viimane"</p>
+      <span class="prompt-silt silt-code">💻 Claude Code</span>
+    </div>
+  </div>
+  <div class="prompt-rida">
+    <span class="prompt-nr">36</span>
+    <div class="prompt-sisu">
+      <p class="prompt-tekst">"lisasin kausta faili favicon.ico lisa see koolituslehele"</p>
       <span class="prompt-silt silt-code">💻 Claude Code</span>
     </div>
   </div>
