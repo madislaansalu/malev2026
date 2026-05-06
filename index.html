@@ -782,6 +782,28 @@ malev2026/<br>
   <li>Koolitusmaterjal on nüüd jagamisvalmis link: <a href="https://madislaansalu.github.io/malev2026/" target="_blank" style="color:#1A7A6E;">https://madislaansalu.github.io/malev2026/</a></li>
 </ul>
 
+<h2>Samm 27 — Püsiva reegli seadistamine: koolitusmaterjal igast promptist</h2>
+
+<div class="promptbox">
+  <div class="prompt-header">Prompt 27: "jäta meelde et alati pärast minu promti teed sa ka koolituslehele täienduse"</div>
+  <div class="prompt-body">Kasutaja andis Claude'ile püsiva käitumisjuhise — see on nn "töörežiimi" seadistamine. Üks lause muudab Claude'i käitumist kõigis järgmistes sammudes automaatselt.</div>
+</div>
+
+<div class="responsebox">
+  <div class="response-header">🤖 Claude'i vastus</div>
+  <div class="response-body">Claude salvestas reegli mällu kahes kohas:<br><br>
+  • <code>feedback_koolitusmaterjal.md</code> — reegel koos selgitusega miks ja kuidas<br>
+  • <code>MEMORY.md</code> — indeksisse lisatud viide<br><br>
+  <strong>Reegel:</strong> Pärast iga kasutaja prompti lisa uus samm <code>index.html</code> koolitusmaterjali samas prompt+vastus formaadis, uuenda kokkuvõtte loend, seejärel küsi kinnitust git push enne GitHubi saatmist.</div>
+</div>
+
+<p><strong>Õppetund — töörežiimi seadistamine:</strong></p>
+<ul>
+  <li>Ühe lausega saad Claude'ile anda püsiva käitumisjuhise terveks sessiooniks</li>
+  <li>Claude salvestab reeglid mällu — need kehtivad ka järgmistes sessioonides</li>
+  <li>Hea reegel sisaldab: <em>mida teha</em>, <em>millal teha</em> ja <em>kuidas teha</em></li>
+</ul>
+
 
 <!-- 3. PÕHIMÕTTED -->
 <h1 id="pohimotted">3. Kuidas Claude'iga tõhusalt suhelda — 7 põhimõtet</h1>
@@ -916,6 +938,7 @@ python malev_kandideerimine.py
   <li>Git repo seadistati ja failid lükati GitHubi (Samm 25)</li>
   <li>Git repo seadistati ja failid lükati GitHubi (Samm 25)</li>
   <li>GitHub Pages aktiveeriti — koolitusmaterjal on avalikult kättesaadav (Samm 26)</li>
+  <li>Claude'ile anti püsiv reegel: täienda koolitusmaterjali pärast iga prompti (Samm 27)</li>
 </ol>
 
 <br>
