@@ -77,7 +77,7 @@ ANDMED = {
 # ─────────────────────────────────────────────
 #  AJASTUS
 # ─────────────────────────────────────────────
-KANDIDEERIMISE_ALGUS = time(16, 0, 0)   # 16:00:00
+KANDIDEERIMISE_ALGUS = time(15, 58, 0)  # 15:58:00
 MALEV_URL = "https://malev.ee/"
 
 
@@ -90,7 +90,19 @@ async def oota_kuni_16(page):
     while True:
         now = datetime.now().time()
         if now >= KANDIDEERIMISE_ALGUS:
-            await page.goto(MALEV_URL, wait_until="domcontentloaded")
+            try:
+                await page.goto(MALEV_URL, wait_until="domcontentloaded", timeout=10000)
+                staatus = page.url
+                # Kontrolli 503 / vealohtliku sisu
+                content = await page.content()
+                if "503" in content or "unavailable" in content.lower():
+                    log(f"⚠️  {datetime.now().strftime('%H:%M:%S')} — server 503, proovin uuesti...", "WARN")
+                    await asyncio.sleep(2)
+                    continue
+            except Exception as e:
+                log(f"⚠️  {datetime.now().strftime('%H:%M:%S')} — ühenduse viga ({e}), proovin uuesti...", "WARN")
+                await asyncio.sleep(2)
+                continue
             # Otsi kandideerimisnuppu / linki
             link = await leia_kandideerimislink(page)
             if link:
@@ -236,20 +248,50 @@ async def taida_kohandatud_vorm(page):
 async def esita_ankeet(page):
     """Leiab ja klikib esitamise nupu."""
     log("🚀  Esitan ankeedi...")
-    for tekst in ["Esita", "Submit", "Saada", "Kandideeri", "Kinnita"]:
+
+    # Tee ekraanitõmmis enne esitamist
+    await page.screenshot(path="enne_esitamist.png")
+    log("📸  Ekraanitõmmis enne esitamist: enne_esitamist.png")
+
+    # 1) Proovi role=button tekstiga
+    for tekst in ["Esita", "Submit", "Saada", "Kandideeri", "Kinnita", "Registreeri", "Edasi", "Next"]:
         try:
             nupp = page.get_by_role("button", name=tekst, exact=False).first
             if await nupp.count() > 0:
                 await nupp.click()
                 log(f"✅  Ankeet esitatud! ({tekst})")
                 await asyncio.sleep(3)
-                # Tee ekraanitõmmis kinnituseks
                 await page.screenshot(path="kinnituskuva.png")
                 log("📸  Ekraanitõmmis salvestatud: kinnituskuva.png")
                 return True
         except Exception:
             continue
-    log("⚠️  Esitamisnuppu ei leitud — kontrolli brauser akent käsitsi!", "WARN")
+
+    # 2) Proovi input[type=submit]
+    try:
+        nupp = page.locator("input[type='submit']").first
+        if await nupp.count() > 0:
+            val = await nupp.get_attribute("value") or "submit"
+            await nupp.click()
+            log(f"✅  Ankeet esitatud! (input[type=submit]: {val})")
+            await asyncio.sleep(3)
+            await page.screenshot(path="kinnituskuva.png")
+            log("📸  Ekraanitõmmis salvestatud: kinnituskuva.png")
+            return True
+    except Exception:
+        pass
+
+    # 3) Proovi mis tahes nupp lehel
+    try:
+        nupud = await page.query_selector_all("button, input[type='submit'], input[type='button']")
+        log(f"   Leitud {len(nupud)} nuppu lehel:", "WARN")
+        for n in nupud:
+            tekst = await n.inner_text() if await n.get_attribute("type") != "submit" else await n.get_attribute("value")
+            log(f"   — '{tekst}'", "WARN")
+    except Exception:
+        pass
+
+    log("⚠️  Esitamisnuppu ei leitud — kontrolli enne_esitamist.png!", "WARN")
     return False
 
 
@@ -282,7 +324,7 @@ async def main():
 
         # Ava malev.ee juba ette
         await page.goto(MALEV_URL, wait_until="domcontentloaded")
-        log(f"\n🌐  malev.ee avatud. Ootan kuni 16:00...\n")
+        log(f"\n🌐  malev.ee avatud. Ootan kuni {KANDIDEERIMISE_ALGUS.strftime('%H:%M')}...\n")
 
         # Oota kandideerimislinki
         kandideerimis_url = await oota_kuni_16(page)
@@ -296,10 +338,16 @@ async def main():
             input("Vajuta Enter sulgemiseks...")
             return
 
-        # Ava kandideerimisvorm
+        # Ava kandideerimisvorm (proovi kuni õnnestub)
         log(f"\n➡️   Avan vormi: {kandideerimis_url}")
-        await page.goto(kandideerimis_url, wait_until="domcontentloaded")
-        await asyncio.sleep(1)
+        while True:
+            try:
+                await page.goto(kandideerimis_url, wait_until="domcontentloaded", timeout=15000)
+                await asyncio.sleep(1)
+                break
+            except Exception as e:
+                log(f"⚠️  Vormi avamine ebaõnnestus ({e}), proovin uuesti...", "WARN")
+                await asyncio.sleep(3)
 
         # Tuvasta vormi tüüp
         url = page.url
@@ -314,7 +362,8 @@ async def main():
         log("\n" + "=" * 55)
         log("⚠️   PALUN KONTROLLI BRAUSER AKNAS KÕIK VÄLJAD ÜLE!")
         log("=" * 55)
-        kinnitus = input("\nKas esitan ankeedi? (jah/ei): ").strip().lower()
+        kinnitus_raw = input("\nKas esitan ankeedi? (jah/ei): ")
+        kinnitus = "".join(c for c in kinnitus_raw if c.isalpha()).lower()
 
         if kinnitus in ["jah", "j", "yes", "y"]:
             esitatud = await esita_ankeet(page)
